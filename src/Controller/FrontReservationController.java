@@ -7,7 +7,13 @@
 //adem
 package Controller;
 
+import com.twilio.Twilio;
+import com.twilio.converter.Promoter;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
+import java.net.URI;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.math.BigDecimal;
 import entities.Reservation;
@@ -58,7 +64,8 @@ import utils.MyConnexion;
  * @author user
  */
 public class FrontReservationController implements Initializable {
-
+  public static final String ACCOUNT_SID = "AC577d98d4a3529117634d2665ff71cb4d";
+  public static final String AUTH_TOKEN = "bf8dc2397230c108b876eb25a3c46b4e";
     @FXML
     private AnchorPane contentArea;
     @FXML
@@ -92,7 +99,7 @@ public class FrontReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-         
+
            String selectQuery = "SELECT marque ,couleur,vitesse_max FROM vehicule WHERE id = ?";
         try {
            PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(selectQuery);
@@ -188,6 +195,7 @@ if (result.isPresent() && result.get() == ButtonType.OK) {
         al.setContentText("Les dates saisies sont invalides!");
         al.showAndWait();
         return;
+        
     }
 
     Reservation r = new Reservation(Integer.parseInt(champId.getText()), dateDebut.toString(), dateFin.toString());
@@ -199,6 +207,18 @@ if (result.isPresent() && result.get() == ButtonType.OK) {
     al.setHeaderText(null);
     al.setContentText("Votre réservation a été faite");
     al.showAndWait();
+    
+    
+    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    Message message = Message.creator(
+      new com.twilio.type.PhoneNumber("+21652510089"),
+      new com.twilio.type.PhoneNumber("+12708195429"),
+      "Votre réservation a été faite de "+champDateDebut.getValue()+ " jusqu à "+champDateFin.getValue())
+
+    .create();
+
+    System.out.println(message.getSid());
+    
 }
 
     }

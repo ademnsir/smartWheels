@@ -362,8 +362,8 @@ alert.showAndWait();
     if (tab.getItems().get(i).getMarque().equals(autoTextField.getText())) { 
         // select the row
         tab.getSelectionModel().select(i);
-    
-    }
+       
+}
    
     } 
        
