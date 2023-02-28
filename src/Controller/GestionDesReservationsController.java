@@ -5,18 +5,42 @@
  */
 package Controller;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import entities.Reservation;
 import entities.Vehicule;
+import java.awt.Desktop;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,9 +59,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 import services.Reservation_Service;
 import services.vehicule_Service;
+import utils.MyConnexion;
 
 /**
  * FXML Controller class
@@ -79,6 +106,12 @@ public class GestionDesReservationsController implements Initializable {
     private TableColumn<?, ?> colm;
     @FXML
     private Button statistique;
+    @FXML
+    private Button impressionpdf;
+    @FXML
+    private TextField autoTextField;
+    @FXML
+    private Button recherche_Reservation;
 
     /**
      * Initializes the controller class.
@@ -91,7 +124,21 @@ public class GestionDesReservationsController implements Initializable {
         SetAllTextField();
         });
         this.afficher();
+ 
         
+        //pour les jours /mois dans  la barre de recherche
+int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+List<LocalDate> dates = new ArrayList<>();
+for (int j = 1; j <= 12; j++) {
+    int days = daysInMonth[j-1];
+    for (int i = 1; i <= days; i++) {
+        LocalDate date = LocalDate.of(2023, j, i);
+        dates.add(date);
+    }
+}
+
+TextFields.bindAutoCompletion(autoTextField, dates);
     }
 public void SetAllTextField()
    {
@@ -323,8 +370,161 @@ Reservation_Service vs= new Reservation_Service();
             System.out.println("Probleme:"+e);
         }
     }
-    
-    
-    
-    
+
+    @FXML
+
+private void impressionpdf(ActionEvent event) {
+    colid_res.setCellValueFactory(new PropertyValueFactory<>("id_res"));
+    coldd_r.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
+    coldf_r.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+    colm.setCellValueFactory(new PropertyValueFactory<>("montant"));
+
+    // Configurez le comportement du bouton lorsqu'il est cliqué
+    impressionpdf.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            try {
+
+                // Afficher une boîte de dialogue de sauvegarde pour spécifier le nom et l'emplacement du fichier PDF
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Enregistrer le fichier PDF");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF (*.pdf)", "*.pdf"));
+                File file = fileChooser.showSaveDialog(null);
+
+                if (file != null) {
+                    Document document = new Document();
+                    document.setMargins(20, 20, 20, 20);
+                    // Configurez la destination du fichier PDF
+                    FileOutputStream fos = new FileOutputStream(file);
+                    PdfWriter writer = PdfWriter.getInstance(document, fos);
+
+                    // Ouvrez le document pour écrire le contenu
+                    document.open();
+
+                    document.addTitle("Rapport de réservations");
+
+// Ajoutez le logo de l'entreprise
+
+                Image logo = Image.getInstance("C:/Users/user/Desktop/clone/smartWheels/src/images/a.png");
+                logo.scaleAbsolute(100, 100);
+                document.add(logo);
+// Ajoutez les informations de l'entreprise
+                    Paragraph infos = new Paragraph();
+                    Font headerFont1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+                    headerFont1.setColor(new BaseColor(82, 67, 143));
+                    infos.add(new Phrase("SMART WHEELS\n", headerFont1));
+                    document.add(infos);
+
+
+                    // Ajoutez une table PDF pour afficher les données de la tableView
+                    PdfPTable table = new PdfPTable(4);
+                    table.setWidthPercentage(100);
+                    table.setSpacingBefore(20f);
+                    table.setSpacingAfter(20f);
+                    
+
+                    // Configurez les largeurs de colonne de la table PDF
+                    float[] columnWidths = {1f,2f, 2f, 1f};
+                    table.setWidths(columnWidths);
+
+                    // Créez une cellule PDF pour l'en-tête de chaque colonne
+Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
+
+
+
+ PdfPCell cell = new PdfPCell(new Phrase("ID", headerFont));
+                cell.setBackgroundColor(new BaseColor(82, 67, 143)); // couleur hexadécimale #52438F
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setBorderColor(BaseColor.WHITE); // pour rendre les bordures blanches
+                table.addCell(cell);
+                
+                
+cell = new PdfPCell(new Phrase("Date de Debut", headerFont));
+cell.setBackgroundColor(new BaseColor(82, 67, 143)); // couleur hexadécimale #52438F
+cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+cell.setBorderColor(BaseColor.WHITE); // pour rendre les bordures blanches
+table.addCell(cell);
+
+cell = new PdfPCell(new Phrase("Date de fin", headerFont));
+cell.setBackgroundColor(new BaseColor(82, 67, 143)); // couleur hexadécimale #52438F
+cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+cell.setBorderColor(BaseColor.WHITE); // pour rendre les bordures blanches
+table.addCell(cell);
+
+cell = new PdfPCell(new Phrase("Montant", headerFont));
+cell.setBackgroundColor(new BaseColor(82, 67, 143)); // couleur hexadécimale #52438F
+cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+cell.setBorderColor(BaseColor.WHITE); // pour rendre les bordures blanches
+table.addCell(cell);
+
+
+                    // Ajoutez les données de chaque ligne à la table PDF
+                    List<Reservation> items = tab.getItems();
+for (Reservation item : items) {
+    cell = new PdfPCell(new Phrase(Integer.valueOf(item.getId_res()).toString()));
+    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+    table.addCell(cell);
+
+    cell = new PdfPCell(new Phrase(item.getDate_debut().toString()));
+    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+    table.addCell(cell);
+
+    cell = new PdfPCell(new Phrase(item.getDate_fin().toString()));
+    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+    table.addCell(cell);
+
+    cell = new PdfPCell(new Phrase(Double.toString(item.getMontant())));
+    cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+    table.addCell(cell);
 }
+
+                    // Ajoutez la table PDF au document
+                    document.add(table);
+
+                    // Fermez le document
+                    document.close();
+
+                    // Ouvrir le fichier PDF dans une application de lecture de PDF
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().open(file);
+                    }
+
+
+                   /*
+                    Alert al = new Alert(Alert.AlertType.INFORMATION);
+                    al.setTitle("Impression PDF");
+                    al.setHeaderText(null);
+                    al.setContentText("Le fichier PDF a été créé");
+                    al.showAndWait();
+*/
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors de la création du fichier PDF : " + e.getMessage());
+            }
+        }
+    });
+}
+
+    @FXML
+    private void recherche_Reservation(ActionEvent event) {
+        
+ String requete = "select * from reservation where date_debut=?";
+                     try {
+                      
+             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+
+             ps.setString(1,autoTextField.getText());
+
+             ps.executeQuery();          
+           
+        } catch (Exception e) {
+                         System.out.println(e);
+          
+        }    
+
+    }
+}
+
+    
+          
+
