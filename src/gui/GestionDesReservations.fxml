@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -102,7 +103,36 @@
                            <children>
                               <AnchorPane layoutX="-20.0" layoutY="-18.0" prefHeight="714.0" prefWidth="1122.0" style="-fx-background-color: F3F0F0;">
                                  <children>
-                                    <AnchorPane layoutX="371.0" layoutY="34.0" prefHeight="59.0" prefWidth="706.0" style="-fx-border-color: #52438F;" />
+                                    <AnchorPane layoutX="371.0" layoutY="34.0" prefHeight="59.0" prefWidth="706.0" style="-fx-border-color: #52438F;">
+                                       <children>
+                                          <Button fx:id="refreshTableView" layoutX="404.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshTableView" prefHeight="46.0" prefWidth="111.0" style="-fx-background-color: F3F0F0;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/reload-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label layoutX="432.0" layoutY="40.0" text="Actualiser" textFill="#52438f">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <ChoiceBox fx:id="choiceBoxMois" layoutX="14.0" layoutY="10.0" prefHeight="40.0" prefWidth="276.0" style="-fx-border-color: #6F5CC2;" />
+                                          <Button fx:id="recherche_Reservation" layoutX="289.0" layoutY="10.0" mnemonicParsing="false" onAction="#recherche_Reservation" prefHeight="40.0" prefWidth="36.0" style="-fx-background-color: #6F5CC2;" textFill="WHITE">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="15.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/search-icon%20(2).png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children></AnchorPane>
                                     <Button fx:id="supprimer_reservation" layoutX="561.0" layoutY="463.0" mnemonicParsing="false" onAction="#supprimer_reservation" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #6F5CC2;" text="Supprimer" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
@@ -170,19 +200,6 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="autoTextField" layoutX="374.0" layoutY="43.0" prefHeight="41.0" prefWidth="248.0" promptText="chercher par mois" style="-fx-border-color: #6F5CC2;" text="2023-" />
-                                    <Button fx:id="recherche_Reservation" layoutX="621.0" layoutY="43.0" mnemonicParsing="false" onAction="#recherche_Reservation" prefHeight="40.0" prefWidth="36.0" style="-fx-background-color: #6F5CC2;" textFill="WHITE">
-                                       <font>
-                                          <Font name="Gill Sans MT" size="15.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/search-icon%20(2).png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
                                  </children>
                               </AnchorPane>
                            </children>

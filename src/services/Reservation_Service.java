@@ -16,6 +16,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -64,13 +65,18 @@ public void ajouter_reservation(Reservation r)
             Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
-        alert.setContentText("cette vehicule a été déja réserver ou inéxistant!");
+        alert.setContentText("cette vehicule a été déja réserver!");
         alert.showAndWait();
           
         }    
 
 
-}     
+}
+
+
+
+
+
 
  public ObservableList<String> GetAllIdUser() {
         ObservableList<String> data=FXCollections.observableArrayList();

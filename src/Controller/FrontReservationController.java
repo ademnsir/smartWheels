@@ -8,28 +8,14 @@
 package Controller;
 
 import com.twilio.Twilio;
-import com.twilio.converter.Promoter;
 import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-
-import java.net.URI;
-import java.math.BigDecimal;
-import java.net.URI;
-import java.math.BigDecimal;
 import entities.Reservation;
-import entities.Vehicule;
-import java.awt.Insets;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -40,20 +26,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import static javafx.scene.control.Alert.AlertType.values;
 import javafx.scene.control.Button;
-import static javafx.scene.control.ButtonBar.ButtonData.values;
 import javafx.scene.control.ButtonType;
-import static javafx.scene.control.ContentDisplay.values;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import services.Reservation_Service;
 import utils.MyConnexion;
@@ -99,7 +82,7 @@ public class FrontReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
+//Affichage des donneés de la base  sur  le front
            String selectQuery = "SELECT marque ,couleur,vitesse_max FROM vehicule WHERE id = ?";
         try {
            PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(selectQuery);
@@ -134,6 +117,7 @@ public class FrontReservationController implements Initializable {
 
     }    
 
+    //bouton go back to gestion des reservations
     @FXML
     private void back(ActionEvent event) throws IOException {
          try{
@@ -167,8 +151,11 @@ champDateDebut.setPromptText("YYYY-MM-DD");
 DatePicker champDateFin = new DatePicker();
 champDateFin.setPromptText("YYYY-MM-DD");
 
+
 // Création du GridPane pour les champs de saisie
 GridPane grid = new GridPane();
+grid.setPrefSize(300, 300);
+grid.setStyle("-fx-background-color: #6F5CC2;");
 grid.setHgap(10);
 grid.setVgap(10);
 
@@ -197,7 +184,7 @@ if (result.isPresent() && result.get() == ButtonType.OK) {
         return;
         
     }
-
+    
     Reservation r = new Reservation(Integer.parseInt(champId.getText()), dateDebut.toString(), dateFin.toString());
     Reservation_Service a = new Reservation_Service();
     a.ajouter_reservation(r);
