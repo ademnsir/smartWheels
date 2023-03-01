@@ -7,19 +7,19 @@ package Controller;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
+
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfContentByte;
+
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Reservation;
-import entities.Vehicule;
+
 import java.awt.Desktop;
 
 import java.io.File;
@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +37,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -51,6 +54,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -108,10 +112,15 @@ public class GestionDesReservationsController implements Initializable {
     private Button statistique;
     @FXML
     private Button impressionpdf;
-    @FXML
     private TextField autoTextField;
     @FXML
     private Button recherche_Reservation;
+    @FXML
+    private Button refreshTableView;
+    @FXML
+    private ChoiceBox<String> choiceBoxMois;
+    @FXML
+    private Button anglais;
 
     /**
      * Initializes the controller class.
@@ -126,19 +135,15 @@ public class GestionDesReservationsController implements Initializable {
         this.afficher();
  
         
-        //pour les jours /mois dans  la barre de recherche
-int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        //liste deroulante mois reservation bar recherche
+ObservableList<String> moisList = FXCollections.observableArrayList("Janvier                                                              ","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
 
-List<LocalDate> dates = new ArrayList<>();
-for (int j = 1; j <= 12; j++) {
-    int days = daysInMonth[j-1];
-    for (int i = 1; i <= days; i++) {
-        LocalDate date = LocalDate.of(2023, j, i);
-        dates.add(date);
-    }
-}
 
-TextFields.bindAutoCompletion(autoTextField, dates);
+choiceBoxMois.setItems(moisList);
+
+
+
+
     }
 public void SetAllTextField()
    {
@@ -273,7 +278,7 @@ try {
         alertDate.setHeaderText(null);
         alertDate.setContentText("La date de début doit être antérieure à la date de fin");
         alertDate.showAndWait();
-        return;
+       
     }
     
     else {
@@ -293,12 +298,7 @@ try {
     // Les dates sont valides, vous pouvez créer votre objet Reservation
 
 } catch (DateTimeParseException e) {
-    Alert alertDate = new Alert(Alert.AlertType.ERROR);
-    alertDate.setTitle("Erreur de saisie");
-    alertDate.setHeaderText(null);
-    alertDate.setContentText("Veuillez saisir des dates valides au format YYYY-MM-DD.");
-    alertDate.showAndWait();
-    return;
+
 }       
                 }
        
@@ -386,10 +386,12 @@ private void impressionpdf(ActionEvent event) {
             try {
 
                 // Afficher une boîte de dialogue de sauvegarde pour spécifier le nom et l'emplacement du fichier PDF
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Enregistrer le fichier PDF");
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF (*.pdf)", "*.pdf"));
-                File file = fileChooser.showSaveDialog(null);
+             FileChooser fileChooser = new FileChooser();
+fileChooser.setInitialDirectory(new File("C:/Users/user/Desktop")); // définir le répertoire initial ici
+fileChooser.setTitle("Enregistrer le fichier PDF");
+fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF (*.pdf)", "*.pdf"));
+File file = fileChooser.showSaveDialog(null);
+
 
                 if (file != null) {
                     Document document = new Document();
@@ -506,23 +508,60 @@ for (Reservation item : items) {
 }
 
     @FXML
-    private void recherche_Reservation(ActionEvent event) {
-        
- String requete = "select * from reservation where date_debut=?";
-                     try {
-                      
-             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+private void recherche_Reservation(ActionEvent event) {
+    String mois = choiceBoxMois.getSelectionModel().getSelectedItem();
+    ObservableList<Reservation> result = FXCollections.observableArrayList();
 
-             ps.setString(1,autoTextField.getText());
-
-             ps.executeQuery();          
-           
-        } catch (Exception e) {
-                         System.out.println(e);
-          
-        }    
-
+    //condition sur  le bouton chercher Si aucun mois n'est sélectionné
+    if(mois == null || mois.isEmpty()) { 
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText("Veuillez sélectionner un mois avant de lancer la recherche");
+        alert.showAndWait();
+        return;
     }
+
+    try {
+        DateFormat inputFormat = new SimpleDateFormat("MMMM", Locale.FRANCE);
+        DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateDebut = inputFormat.parse(mois);
+        String dateDebutStr = outputFormat.format(dateDebut);
+        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+        ps.setString(1, dateDebutStr);
+        ResultSet rs=ps.executeQuery();
+        
+        if (!rs.isBeforeFirst() ) { // Si le ResultSet est vide
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Avertissement");
+            alert.setHeaderText("Aucune réservation trouvée pour ce mois");
+            alert.showAndWait();
+        } else {
+            while (rs.next()) {
+                result.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4)));
+            }
+            tab.setItems(result);
+        }
+        
+    } catch(Exception ex) {
+        System.out.println(ex);
+    }
+}
+
+
+
+
+
+    @FXML
+    private void refreshTableView(ActionEvent event) {
+        
+this.afficher();
+    }
+
+
+    
+    
+    
+
 }
 
     
