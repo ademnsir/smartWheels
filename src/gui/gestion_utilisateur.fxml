@@ -27,7 +27,7 @@
    <children>
       <AnchorPane fx:id="anchor" prefHeight="594.0" prefWidth="211.0" style="-fx-background-color: #6F5CC2;">
          <children>
-            <Pane fx:id="left" layoutX="-12.0" layoutY="128.0" prefHeight="447.0" prefWidth="195.0" stylesheets="@../styles/dahsboard.css">
+            <Pane fx:id="left" layoutX="-12.0" layoutY="129.0" prefHeight="446.0" prefWidth="234.0" stylesheets="@../styles/dahsboard.css">
                <children>
                   <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="-57.0" mnemonicParsing="false" onAction="#home" prefHeight="39.0" prefWidth="183.0" text="    Home" textFill="WHITE">
                      <font>
@@ -54,7 +54,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="346.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="204.0" text="   Gestion Evenement" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="204.0" text="   Gestion Evenement" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -94,16 +94,21 @@
                         <Image url="@../images/gestion_client/Action-configure-icon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/gestion_client/Actions-view-calendar-upcoming-days-icon.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="39.0" prefWidth="183.0" style="-fx-background-color: transparent; -fx-border-image-width: 5px; -fx-border-color: white;" text="Déconnexion " textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="395.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="39.0" prefWidth="225.0" text="   Gestion Reclamation" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/gestion_client/Actions-view-calendar-upcoming-days-icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
@@ -221,16 +226,21 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="l_prenom" layoutX="1017.0" layoutY="22.0" text="Prenom" textFill="WHITE">
+            <Label fx:id="l_prenom" layoutX="827.0" layoutY="36.0" text="Prenom" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <Label fx:id="l_nom" layoutX="943.0" layoutY="22.0" text="Nom" textFill="WHITE">
+            <Label fx:id="l_nom" layoutX="839.0" layoutY="6.0" text="Nom" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
+            <Button alignment="BASELINE_LEFT" layoutX="965.0" layoutY="16.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: transparent; -fx-border-image-width: 5px; -fx-border-color: white;" text="Déconnexion " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
    </children>
 </AnchorPane>

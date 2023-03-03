@@ -917,4 +917,19 @@ public class Gestion_UtilisateurController implements Initializable {
             System.out.println("Probleme:"+e);
         }
     }
+
+    @FXML
+    private void Reclamation(ActionEvent event) {
+         try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/FXMLDocument.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
 }
