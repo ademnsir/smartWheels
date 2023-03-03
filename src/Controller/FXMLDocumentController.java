@@ -9,37 +9,50 @@ import Entities.Commentaire;
 import Entities.Reclamation;
 import Services.CommentaireCrud;
 import Services.ReclamationCrud;
-import Utils.MyConnection;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -48,8 +61,6 @@ import static sun.security.jgss.GSSUtil.login;
 public class FXMLDocumentController implements Initializable {
     
     private Label label;
-    @FXML
-    private TextField tfid;
     @FXML
     private TextField tfnom;
     @FXML
@@ -78,7 +89,7 @@ public class FXMLDocumentController implements Initializable {
     private Button btndelete;
     ReclamationCrud rc=new ReclamationCrud();
     CommentaireCrud cmntr =new CommentaireCrud();
-
+    private List<Reclamation> listeDesReclamations;
     @FXML
     private AnchorPane anchor;
     @FXML
@@ -93,6 +104,8 @@ public class FXMLDocumentController implements Initializable {
     private Button btnUpdateCmntr;
     @FXML
     private Button btnDeleteCmntr;
+     @FXML
+    private Button btnExportExcel;
     @FXML
     private TableView<Commentaire> tvcommentaire;
     @FXML
@@ -103,15 +116,31 @@ public class FXMLDocumentController implements Initializable {
     private TextField tfidcom;
     @FXML
     private Button btn_vehicule;
+    @FXML
+    private TextField NomTextField;
+    @FXML
+    private TextField ContenuTextField;
+    @FXML
+    private TextField MailTextField;
+    @FXML
+    private TableColumn<Reclamation, Date> cdate;
+    @FXML
+    private TextField tfrecherche;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showReclamation();
+     recherche_avance();
+        //showReclamation();
         showCommentaire();
     }
+   
+    
+
+
     
         
   
 public ObservableList<Reclamation>getReclamationList(){
+    this.listeDesReclamations=rc.listeDesReclamations();
 ObservableList<Reclamation> ReclamationList = FXCollections.observableArrayList();
 ReclamationList.addAll(rc.listeDesReclamations());
 return ReclamationList; 
@@ -125,6 +154,7 @@ colnom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
 colprenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
 coladresse.setCellValueFactory(new PropertyValueFactory<>("Adresse"));
 colcontenu.setCellValueFactory(new PropertyValueFactory<>("Contenu"));
+cdate.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
 tvreclamation.setItems(List);
 }
 
@@ -153,6 +183,7 @@ tvreclamation.setItems(List);
         }
         else{
             rc.ajouterEntitee(r);
+            //sendMail();
         showReclamation();
         }
         }
@@ -161,18 +192,32 @@ tvreclamation.setItems(List);
     }
     @FXML
     private void update(ActionEvent event) {
-         Alert alert =new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("confirmer la modification");
-        alert.setContentText("voulez vous vraiment modifier");
-        alert.showAndWait();
+         
          Reclamation r =new Reclamation();
-         int idModifier=tvreclamation.getSelectionModel().getSelectedItem().getId();
-        r.setNom(tfnom.getText());
-        r.setPrenom(tfprenom.getText());
-        r.setAdresse(tfadresse.getText());
-        r.setContenu(tfcontenu.getText());
-        rc.updateReclamation(idModifier, r);
-        showReclamation();
+         Reclamation amodifier=tvreclamation.getSelectionModel().getSelectedItem();
+         Date today=new Date();
+        if(today.getDate()-amodifier.getDateCreation().getDate()>1){
+            Alert alert2 =new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Erreur modification");
+            alert2.setContentText("voulez vous vraiment modifier");
+            alert2.showAndWait();
+        }
+        else{
+            int idModifier=amodifier.getId();
+         
+            r.setNom(tfnom.getText());
+            r.setPrenom(tfprenom.getText());
+            r.setAdresse(tfadresse.getText());
+            r.setContenu(tfcontenu.getText());
+            Alert alert =new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("confirmer la modification");
+            alert.setContentText("voulez vous vraiment modifier");
+            alert.showAndWait();
+            rc.updateReclamation(idModifier, r);
+            
+            showReclamation();
+        }
+         
 
     }
 
@@ -237,6 +282,7 @@ tvcommentaire.setItems(List);
         
         cmntr.ajouterCommentaire(r);
         showCommentaire();}
+         
     }
 
     @FXML
@@ -251,7 +297,23 @@ tvcommentaire.setItems(List);
        
         cmntr.updateCommentaire(idModifier, r);
         showCommentaire();
-    }
+         // Get the index of the newly added row
+    int index = tvreclamation.getItems().size() - 1;
+
+    // Get the new row in the table view
+    ObservableList<Node> rows = tvreclamation.getChildrenUnmodifiable();
+    TableRow<Reclamation> newRow = (TableRow<Reclamation>) rows.get(index);
+
+    // Disable the new row
+   // newRow.setDisable(true);
+
+    // Schedule a task to enable the row after 5 minutes
+    ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    executor.schedule(() -> {
+        Platform.runLater(() -> newRow.setDisable(true));
+    }, 2, TimeUnit.MINUTES);
+}
+    
 
     @FXML
     private void DeleteCmntr(ActionEvent event) {
@@ -282,5 +344,108 @@ return erreur;
            stage.show();
         
     }
-   
+    @FXML
+
+private void exportToExcel(ActionEvent event) {
+    // Get the current stage
+    Stage stage = (Stage) anchor.getScene().getWindow();
+
+    // Create a new file chooser
+    FileChooser fileChooser = new FileChooser();
+
+    // Set the file extension filter to only allow Excel files
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    // Show the file chooser dialog to the user
+    File file = fileChooser.showSaveDialog(stage);
+
+    if (file != null) {
+        // Get the data from the table
+        ObservableList<Reclamation> data = tvreclamation.getItems();
+
+        // Create a new workbook and sheet
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Reclamation Data");
+
+        // Create the header row
+        XSSFRow headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("ID");
+        headerRow.createCell(1).setCellValue("Nom");
+        headerRow.createCell(2).setCellValue("Prenom");
+        headerRow.createCell(3).setCellValue("Adresse");
+        headerRow.createCell(4).setCellValue("Contenu");
+
+        // Add the data rows to the sheet
+        int rowNum = 1;
+        for (Reclamation reclamation : data) {
+            XSSFRow row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(reclamation.getId());
+            row.createCell(1).setCellValue(reclamation.getNom());
+            row.createCell(2).setCellValue(reclamation.getPrenom());
+            row.createCell(3).setCellValue(reclamation.getAdresse());
+            row.createCell(4).setCellValue(reclamation.getContenu());
+        }
+
+        // Write the workbook to the file
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            workbook.write(outputStream);
+            // Show a confirmation dialog to the user
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Export Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("The data was successfully exported to Excel.");
+            alert.showAndWait();
+        } catch (IOException e) {
+            // Show an error dialog to the user
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Export Error");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred while exporting the data to Excel.");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
+    }
+    
+    
+}
+public void recherche_avance(){
+    showReclamation();
+    FilteredList<Reclamation> filtreddata=new FilteredList<>(getReclamationList(),r->true);
+    tfrecherche.textProperty().addListener((observable,oldValue,newValue)->{
+        filtreddata.setPredicate(rec->{
+            if(newValue==null || newValue.isEmpty()){
+                return true;
+            }
+            if(rec.getAdresse().toLowerCase().indexOf(newValue.toLowerCase())!=-1){
+                return true;
+            }
+            else if(rec.getContenu().toLowerCase().indexOf(newValue.toLowerCase())!=-1){
+                return true;
+            }
+            else if(rec.getNom().toLowerCase().indexOf(newValue.toLowerCase())!=-1){
+                return true;
+            }
+            else if(rec.getPrenom().toLowerCase().indexOf(newValue.toLowerCase())!=-1){
+                return true;
+            }
+            else if(rec.getDateCreation().toString().toLowerCase().indexOf(newValue.toLowerCase())!=-1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+        tvreclamation.setItems(filtreddata);
+    });
+}
+
+    @FXML
+    private void tri(ActionEvent event) {
+        List<Reclamation> triParDate=rc.listeDesReclamations()
+                .stream().sorted(Comparator.comparing(Reclamation::getDateCreation)).collect(Collectors.toList());
+        ObservableList<Reclamation> triDate=FXCollections.observableArrayList(triParDate);
+        tvreclamation.setItems(triDate);
+    }
+ 
 }

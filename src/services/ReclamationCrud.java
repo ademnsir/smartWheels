@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,14 +29,15 @@ public class ReclamationCrud {
     }
      public void ajouterEntitee(Reclamation t) {
         try {
-            String requete = "INSERT INTO reclamation(Nom, Prenom,Adresse,Contenu)"
-                    + "VALUES (?,?,?,?)";
+            String requete = "INSERT INTO reclamation(Nom, Prenom,Adresse,Contenu, `dateCreation`)"
+                    + "VALUES (?,?,?,?,?)";
             PreparedStatement pst = cnx
                                     .prepareStatement(requete);
             pst.setString(1, t.getNom());
             pst.setString(2, t.getPrenom());
              pst.setString(3, t.getAdresse());
             pst.setString(4, t.getContenu());
+            pst.setDate(5, new Date(System.currentTimeMillis()));
             pst.executeUpdate();
             System.out.println("Done!");
         } catch (SQLException ex) {
@@ -53,7 +55,7 @@ public void supprimerReclamation(int id){
 }
 public void updateReclamation(int id,Reclamation R){
     try {
-            String query ="UPDATE `reclamation` SET `Nom`='"+R.getNom()+"',`Prenom`='"+R.getPrenom()+"',`Adresse`='"+R.getAdresse()+"',`Contenu`='"+R.getContenu()+"' WHERE id="+id;
+            String query ="UPDATE `reclamation` SET `Nom`='"+R.getNom()+"',`Prenom`='"+R.getPrenom()+"',`Adresse`='"+R.getAdresse()+"',`Contenu`='"+R.getContenu()+"',`dateCreation`='"+new Date(System.currentTimeMillis())+"' WHERE id="+id;
             Statement st=cnx.createStatement();
             st.executeUpdate(query);
         } catch (SQLException ex) {
@@ -76,6 +78,7 @@ public void updateReclamation(int id,Reclamation R){
                 p.setPrenom(rs.getString("Prenom"));
                 p.setAdresse(rs.getString("Adresse"));
                 p.setContenu(rs.getString("Contenu"));
+                p.setDateCreation(rs.getDate("dateCreation"));
                 myList.add(p);
             }
         } catch (SQLException ex) {
@@ -83,6 +86,7 @@ public void updateReclamation(int id,Reclamation R){
         }
         return myList;
     }
+    
     public boolean contentExist(Reclamation r){
         for(Reclamation rr:listeDesReclamations()){
             if(rr.getAdresse().equals(r.getAdresse())&& rr.getContenu().equals(r.getContenu())&& rr.getNom().equals(r.getNom())&&rr.getPrenom().equals(r.getPrenom())){

@@ -27,18 +27,24 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <TableView fx:id="tvreclamation" layoutX="416.0" layoutY="66.0" prefHeight="346.0" prefWidth="472.0">
+                        <TableView fx:id="tvreclamation" layoutX="357.0" layoutY="66.0" prefHeight="346.0" prefWidth="526.0">
                           <columns>
-                            <TableColumn fx:id="colid" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="colnom" prefWidth="75.0" text="Nom" />
-                              <TableColumn fx:id="colprenom" prefWidth="75.0" text="Prenom" />
-                              <TableColumn fx:id="coladresse" prefWidth="131.20001220703125" text="Adresse mail" />
-                              <TableColumn fx:id="colcontenu" prefWidth="115.199951171875" text="Contenu" />
+                            <TableColumn fx:id="colid" prefWidth="31.4666748046875" text="Id" />
+                            <TableColumn fx:id="colnom" prefWidth="76.5333251953125" text="Nom" />
+                              <TableColumn fx:id="colprenom" prefWidth="83.20001220703125" text="Prenom" />
+                              <TableColumn fx:id="coladresse" prefWidth="132.0" text="Adresse mail" />
+                              <TableColumn fx:id="colcontenu" prefWidth="106.9332275390625" text="Contenu" />
+                              <TableColumn fx:id="cdate" prefWidth="91.20001220703125" text="Date" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btninsert" layoutX="98.0" layoutY="311.0" mnemonicParsing="false" onAction="#insert" prefHeight="26.0" prefWidth="88.0" text="Insert" />
-                        <Button fx:id="btnupdate" layoutX="201.0" layoutY="311.0" mnemonicParsing="false" onAction="#update" prefHeight="26.0" prefWidth="88.0" text="Update" />
-                        <Button fx:id="btndelete" layoutX="310.0" layoutY="311.0" mnemonicParsing="false" onAction="#Delete" prefHeight="26.0" prefWidth="79.0" text="Delete" />
+                        <Button fx:id="btnExportExcel" layoutX="425.0" layoutY="431.0" mnemonicParsing="false" onAction="#exportToExcel" text="Export to Excel" />
+
+                        <Button fx:id="btninsert" layoutX="8.0" layoutY="311.0" mnemonicParsing="false" onAction="#insert" prefHeight="26.0" prefWidth="88.0" text="Insert" />
+                        <Button fx:id="btnupdate" layoutX="111.0" layoutY="311.0" mnemonicParsing="false" onAction="#update" prefHeight="26.0" prefWidth="88.0" text="Update" />
+                        <Button fx:id="btndelete" layoutX="220.0" layoutY="311.0" mnemonicParsing="false" onAction="#Delete" prefHeight="26.0" prefWidth="79.0" text="Delete" />
+                        <Label layoutX="62.0" layoutY="412.0" text="Advanced Search" />
+    <TextField fx:id="NomTextField" layoutX="51.0" layoutY="444.0" promptText="Nom" />
+    <TextField fx:id="ContenuTextField" layoutX="51.0" layoutY="483.0" promptText="Contenu" />
                         <VBox layoutX="175.0" layoutY="54.0" prefHeight="199.0" prefWidth="162.0" spacing="10.0">
                            <children>
                               <TextField fx:id="tfnom" />
@@ -71,6 +77,9 @@
                               </Label>
                            </children>
                         </VBox>
+    <TextField fx:id="MailTextField" layoutX="51.0" layoutY="531.0" promptText="Email" />
+                        <TextField fx:id="tfrecherche" layoutX="445.0" layoutY="20.0" />
+                        <Button layoutX="758.0" layoutY="20.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
                      </children>
                   </AnchorPane>
             </content>
