@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utils;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author user
  */
 public class MyConnection {
-      String url="jdbc:mysql://localhost:3306/test";
+      String url="jdbc:mysql://localhost:3306/smart_wheel";
     String login="root";
     String pwd="";
     private Connection cnx;
@@ -23,7 +23,7 @@ public class MyConnection {
     private MyConnection() {
         try {
          cnx = DriverManager.getConnection(url, login, pwd);
-            System.out.println("Connexion établie!");
+    
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

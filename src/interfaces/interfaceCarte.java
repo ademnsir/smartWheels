@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet_transport.interfaces;
+package interfaces;
 
 import javafx.collections.ObservableList;
-import projet_transport.model.Carte_fidelite;
-import projet_transport.model.Utilisateur;
+import entities.Carte_fidelite;
+import entities.Utilisateur;
 
 /**
  *

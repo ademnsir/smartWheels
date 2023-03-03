@@ -123,4 +123,6 @@ chart.getData().addAll(durationSeries, amountSeries);
         }
     }
     
+    
+    
 }

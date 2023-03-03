@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet_transport.services;
+package services;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,10 +23,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javax.swing.JOptionPane;
-import projet_transport.controler.Gestion_UtilisateurController;
-import projet_transport.interfaces.interfaceClient;
-import projet_transport.model.Utilisateur;
-import projet_transport.utils.MyConnexion;
+import Controller.Gestion_UtilisateurController;
+import interfaces.interfaceClient;
+import entities.Utilisateur;
+import utils.MyConnection;
 /**
  *
  * @author aziz
@@ -38,7 +38,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
     {
          try {
             String sql="insert into utilisateur (nom,prenom,email,date_naissance,telephone,region,genre,mot_passe) values (?,?,?,STR_TO_DATE(?,'%Y-%m-%d'),?,?,?,?)";
-            PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement(sql);
+            PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
             ps.setString(1,c.getNom());
             ps.setString(2,c.getPrenom());
             ps.setString(3,c.getEmail());
@@ -58,7 +58,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
     {
         try {      
         String sql="insert into utilisateur (nom,prenom,email,date_naissance,telephone,region,genre,mot_passe,type) values (?,?,?,STR_TO_DATE(?,'%Y-%m-%d'),?,?,?,?,?)";
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement(sql);
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
         ps.setString(1,c.getNom());
         ps.setString(2,c.getPrenom());
         ps.setString(3,c.getEmail());
@@ -78,7 +78,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
         ObservableList<Utilisateur> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from utilisateur");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from utilisateur");
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -96,7 +96,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
     {
        try {
         String sql="update utilisateur set nom=?,prenom=?,email=?,date_naissance=?,telephone=?,region=?,genre=?,mot_passe=?,type=? where id=?;";
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement(sql);
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
         ps.setString(1,c.getNom());
         ps.setString(2,c.getPrenom());
         ps.setString(3,c.getEmail());
@@ -118,7 +118,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
  @Override
     public void Supprimer(int id) {
           try {
-            PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("delete from utilisateur where id=?");
+            PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("delete from utilisateur where id=?");
             ps.setInt(1,id);
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -131,7 +131,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
           Utilisateur u=new Utilisateur();
          try{
              
-          PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from utilisateur where id=?");
+          PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from utilisateur where id=?");
           ps.setString(1, id);
           ResultSet rs=ps.executeQuery();
           while (rs.next())
@@ -162,7 +162,7 @@ public class UtilisateurS implements interfaceClient<Utilisateur>{
     public boolean CheckUserByEmail(String email) {
 try{
              
-          PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from utilisateur where email=?");
+          PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from utilisateur where email=?");
           ps.setString(1, email);
           ResultSet rs=ps.executeQuery();
           if (rs.next())
@@ -179,7 +179,7 @@ try{
     
     public boolean CheckUserAdmin(String email) {
         try{       
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select type from utilisateur where email=?");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select type from utilisateur where email=?");
           ps.setString(1, email);
           ResultSet rs=ps.executeQuery();
           if (rs.next())
@@ -196,7 +196,7 @@ try{
     }
     public boolean CheckAccount(String email,String password) {
         try{       
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from utilisateur where email=? and mot_passe=?");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from utilisateur where email=? and mot_passe=?");
           ps.setString(1, email);
            ps.setString(2, password);
           ResultSet rs=ps.executeQuery();
@@ -215,7 +215,7 @@ try{
     public Utilisateur getUserByEmail(String email) {
         Utilisateur u=new Utilisateur();
          try{       
-        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from utilisateur where email=?");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from utilisateur where email=?");
           ps.setString(1, email);
           ResultSet rs=ps.executeQuery();
           rs.next();
