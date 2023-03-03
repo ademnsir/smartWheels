@@ -102,7 +102,7 @@
                               <AnchorPane layoutX="-20.0" layoutY="-18.0" prefHeight="714.0" prefWidth="1122.0" style="-fx-background-color: F3F0F0;">
                                  <children>
                                     <TextField fx:id="autoTextField" layoutX="245.0" layoutY="29.0" prefHeight="41.0" prefWidth="248.0" promptText="Chercher par marque..." style="-fx-border-color: #6F5CC2;" />
-                                    <Button fx:id="recherche" layoutX="492.0" layoutY="29.0" mnemonicParsing="false" onAction="#chercher" prefHeight="40.0" prefWidth="36.0" style="-fx-background-color: #6F5CC2;" textFill="WHITE">
+                                    <Button fx:id="cherchee" layoutX="492.0" layoutY="29.0" mnemonicParsing="false" onAction="#cherchee" prefHeight="40.0" prefWidth="36.0" style="-fx-background-color: #6F5CC2;" textFill="WHITE">
                                        <font>
                                           <Font name="Gill Sans MT" size="15.0" />
                                        </font>

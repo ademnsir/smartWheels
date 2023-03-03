@@ -19,6 +19,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Reservation;
+import entities.Vehicule;
 
 import java.awt.Desktop;
 
@@ -98,7 +99,6 @@ public class GestionDesReservationsController implements Initializable {
     private TableColumn<?, ?> coldd_r;
     @FXML
     private TableColumn<?, ?> coldf_r;
-    @FXML
     private TextField id_res;
     @FXML
     private DatePicker date_debut;
@@ -120,7 +120,13 @@ public class GestionDesReservationsController implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBoxMois;
     @FXML
-    private Button anglais;
+    private TableColumn<?, ?> colid_v;
+    @FXML
+    private TableColumn<?, ?> colid_c;
+    @FXML
+    private ComboBox<String> id_client;
+    @FXML
+    private ComboBox<String> id_veh;
 
     /**
      * Initializes the controller class.
@@ -141,7 +147,7 @@ ObservableList<String> moisList = FXCollections.observableArrayList("Janvier    
 
 choiceBoxMois.setItems(moisList);
 
-
+this.combo_boxs();
 
 
     }
@@ -282,7 +288,8 @@ try {
     }
     
     else {
-        Reservation r = new Reservation(Integer.parseInt(id_res.getText()), dateDebut.toString(), dateFin.toString());
+        Reservation_Service s=new Reservation_Service();
+        Reservation r = new Reservation(Integer.parseInt(id_res.getText()), dateDebut.toString(), dateFin.toString(),s.calculmontant(dateDebut.toString(), dateFin.toString()),Integer.parseInt(id_veh.getValue().toString()),Integer.parseInt(id_client.getValue().toString()));
     Reservation_Service a = new Reservation_Service();
     a.ajouter_reservation(r);
      a.afficher_reservation();
@@ -324,6 +331,8 @@ Reservation_Service vs= new Reservation_Service();
          coldf_r.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         
          colm.setCellValueFactory(new PropertyValueFactory<>("montant"));
+         colid_v.setCellValueFactory(new PropertyValueFactory<>("id_v"));
+         colid_c.setCellValueFactory(new PropertyValueFactory<>("id_client"));
          tab.setItems(vs.afficher_reservation());  
 
  }   
@@ -537,7 +546,7 @@ private void recherche_Reservation(ActionEvent event) {
             alert.showAndWait();
         } else {
             while (rs.next()) {
-                result.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4)));
+                result.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getInt(6)));
             }
             tab.setItems(result);
         }
@@ -559,7 +568,16 @@ this.afficher();
 
 
     
-    
+    public  void combo_boxs()
+    {
+        Vehicule v=new Vehicule();
+        vehicule_Service vs=new vehicule_Service();
+       
+         ObservableList<String> options =  vs.GetAllIdUser();
+       
+      id_veh.setItems(options);
+      id_veh.setPromptText("Entrer votre vehicule");
+    }
     
 
 }
