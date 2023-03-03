@@ -136,7 +136,7 @@ public void ajouter_reservation(Reservation r)
             while (rs.next())
             {
                 //index de  column
-            data.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4)));
+            data.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getInt(6)));
                 
            }
             
@@ -201,7 +201,7 @@ public void ajouter_reservation(Reservation r)
             while (rs.next())
             {
                 //index de  column
-            data.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4)));
+            data.add(new Reservation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getFloat(4),rs.getInt(5),rs.getInt(6)));
                 
            }
             

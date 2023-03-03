@@ -16,9 +16,9 @@ public class Reservation {
      private  int id_res;
      private  String date_debut;
       private  String date_fin;
-
        private float montant;
-      
+       private int id_v;
+      private int id_client;
           public  Reservation() {
     
       this.id_res=0;
@@ -36,12 +36,30 @@ public class Reservation {
 
     }
     
-        public Reservation(int id_res, String date_debut, String date_fin,float montant) {
+        public Reservation(int id_res, String date_debut, String date_fin,float montant,int id_v,int id_client) {
         this.id_res = id_res;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
-
         this.montant = montant;
+        this.id_v= id_v;
+        this.id_client=id_client;
+    }
+
+    public void setId_client(int id_client) {
+        this.id_client = id_client;
+    }
+
+    public int getId_client() {
+        return id_client;
+    }
+        
+
+    public int getId_v() {
+        return id_v;
+    }
+
+    public void setId_v(int id_v) {
+        this.id_v = id_v;
     }
 
     public float getMontant() {

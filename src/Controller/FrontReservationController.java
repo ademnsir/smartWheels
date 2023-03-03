@@ -74,6 +74,12 @@ public class FrontReservationController implements Initializable {
     private Label vitesselabel2;
     @FXML
     private Label vitesselabel3;
+    @FXML
+    private Label id_vehicule;
+    @FXML
+    private Label id_vehicule1;
+    @FXML
+    private Label id_vehicule2;
  
 
     /**
@@ -83,25 +89,30 @@ public class FrontReservationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
 //Affichage des donneés de la base  sur  le front
-           String selectQuery = "SELECT marque ,couleur,vitesse_max FROM vehicule WHERE id = ?";
+           String selectQuery = "SELECT id, marque ,couleur,vitesse_max FROM vehicule WHERE id = ?";
         try {
            PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(selectQuery);
             for (int i = 1; i <= 6; i++) {
                 ps.setInt(1, i); // id du véhicule à récupérer
                 ResultSet resultSet = ps.executeQuery();
                 if (resultSet.next()) {
+                    int id_vehicule = resultSet.getInt("id");
                     String marque = resultSet.getString("marque");
                     String couleur = resultSet.getString("couleur");
                     String vitesse_max = resultSet.getString("vitesse_max");
                     if (i == 1) {
+                        this.id_vehicule.setText("id_v: " + id_vehicule);
                         marquelabel1.setText("Marque : " + marque);
                         couleurlabel1.setText("couleur : " + couleur);
                         vitesselabel1.setText("vitesseMax: " + vitesse_max);
+                        
                     } else if (i == 2) {
+                        this.id_vehicule1.setText("id_v: " + id_vehicule);
                         marquelabel2.setText("Marque : " + marque);
                          couleurlabel2.setText("couleur : " + couleur);
                          vitesselabel2.setText("vitesseMax : " + vitesse_max);
                     } else if (i == 3) {
+                        this.id_vehicule2.setText("id_v: " + id_vehicule);
                         marquelabel3.setText("Marque : " + marque);
                         couleurlabel3.setText("couleur : " + couleur);
                         vitesselabel3.setText("vitesseMax: " + vitesse_max);
