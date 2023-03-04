@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import Entities.Commentaire;
-import Services.CommentaireCrud;
+import entities.Commentaire;
+import services.CommentaireCrud;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

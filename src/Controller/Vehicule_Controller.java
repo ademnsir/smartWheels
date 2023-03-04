@@ -5,7 +5,7 @@
  */
 package Controller;
 
-
+//adem
 
 import entities.Vehicule;
 
@@ -114,7 +114,7 @@ public class Vehicule_Controller implements Initializable {
 
      private AutoCompletionBinding<String> autoCompletionBinding;
     @FXML
-    private Button recherche;
+    private Button cherchee;
  
 
 
@@ -154,11 +154,13 @@ tab.setOnMouseClicked(event ->{
         });
 //auto pick
  TextFields.bindAutoCompletion(autoTextField,"Xiaomi","NIU","IsinWheel","Inomile","Evercross EV","HITWAY","RCB","Sixfox","Eleglide","DYU");
-
- 
-tab.getSelectionModel().setSelectionMode(
+ //pour la selection multiple
+ tab.getSelectionModel().setSelectionMode(
          SelectionMode.MULTIPLE
          );
+
+ 
+
     }    
 
     
@@ -205,6 +207,7 @@ public void SetAllTextField()
 //SUPPRIMER
     @FXML
     private void supprimer(ActionEvent event) {
+        
         Vehicule v= tab.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(AlertType.CONFIRMATION);
         vehicule_Service vs= new vehicule_Service();   
@@ -255,6 +258,7 @@ public void SetAllTextField()
             alert.showAndWait();
         
         this.afficher();
+        //GestionDesReservationsController.combo_boxs();
         
         }
         else{
@@ -354,29 +358,35 @@ alert.showAndWait();
             
     }
 
+
+
+@FXML
+private void cherchee(ActionEvent event) {
+    tab.getSelectionModel().clearSelection();
+    for (int i = 0; i < tab.getItems().size(); i++) {
+        if (tab.getItems().get(i).getMarque().contains(autoTextField.getText())) {
+            // select the row
+            tab.getSelectionModel().select(i);
+        }
+    }
+}
+
     @FXML
-    private void chercher(ActionEvent event) {
-        tab.getSelectionModel().clearSelection();
-       for (int i = 0; i < tab.getItems().size(); i++) {
-   
-    if (tab.getItems().get(i).getMarque().equals(autoTextField.getText())) { 
-        // select the row
-        tab.getSelectionModel().select(i);
-    
+    private void utilisateur(ActionEvent event) 
+    {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/gestion_utilisateur.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
     }
-   
-    } 
-       
-    }
 
-
-
-    
-
-
-
-
-    
 
     }
     

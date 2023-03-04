@@ -5,10 +5,10 @@
  */
 package Controller;
 
-import Entities.Commentaire;
-import Entities.Reclamation;
-import Services.CommentaireCrud;
-import Services.ReclamationCrud;
+import entities.Commentaire;
+import entities.Reclamation;
+import services.CommentaireCrud;
+import services.ReclamationCrud;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -27,10 +27,11 @@ import javafx.scene.layout.Pane;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -41,15 +42,15 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -199,23 +200,36 @@ tvreclamation.setItems(List);
         if(today.getDate()-amodifier.getDateCreation().getDate()>1){
             Alert alert2 =new Alert(Alert.AlertType.ERROR);
             alert2.setTitle("Erreur modification");
-            alert2.setContentText("voulez vous vraiment modifier");
+            alert2.setContentText("vous ne pouvez pas modifier au dela de 24h!");
             alert2.showAndWait();
         }
         else{
-            int idModifier=amodifier.getId();
-         
-            r.setNom(tfnom.getText());
-            r.setPrenom(tfprenom.getText());
-            r.setAdresse(tfadresse.getText());
-            r.setContenu(tfcontenu.getText());
-            Alert alert =new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("confirmer la modification");
-            alert.setContentText("voulez vous vraiment modifier");
-            alert.showAndWait();
+           if (ControleSaisie().length()>0){
+         Alert alert =new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Modifier Reclamation");
+        alert.setContentText(ControleSaisie());
+        alert.showAndWait();}
+        else {
+        int idModifier=amodifier.getId();
+
+       // Reclamation r =new Reclamation();
+        r.setNom(tfnom.getText());
+        r.setPrenom(tfprenom.getText());
+        r.setAdresse(tfadresse.getText());
+        r.setContenu(tfcontenu.getText());
+        if(rc.contentExist(r)){
+            Alert alert =new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Modifier Reclamation");
+        alert.setContentText("Reclamation existe deja!!");
+        alert.showAndWait();
+        }
+        else{
             rc.updateReclamation(idModifier, r);
-            
-            showReclamation();
+        showReclamation();
+        }
+        }
+
+
         }
          
 
@@ -223,14 +237,24 @@ tvreclamation.setItems(List);
 
     @FXML
     private void Delete(ActionEvent event) {
-        Alert alert =new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("confirmer la suppression");
-        alert.setContentText("voulez vous vraiment supprimer la ligne");
-        alert.showAndWait();
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Confirm Deletion");
+    alert.setContentText("Are you sure you want to delete the selected item?");
+
+    ButtonType deleteButtonType = new ButtonType("Delete");
+    ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+    alert.getButtonTypes().setAll(deleteButtonType, cancelButtonType);
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == deleteButtonType) {
         int idSup=tvreclamation.getSelectionModel().getSelectedItem().getId();
         rc.supprimerReclamation(idSup);
         showReclamation();
+    } else {
+        alert.close();
     }
+}
 private String ControleSaisie(){
 String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +"[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
@@ -276,7 +300,9 @@ tvcommentaire.setItems(List);
         alert.setTitle("done");
         alert.setContentText(ControleSaisie());
         alert.showAndWait();}
-        else {
+         else if(detectBadWords()){
+         }
+         else{
         Commentaire r =new Commentaire();
         r.setContenu(tfCmntr.getText());
         
@@ -286,45 +312,72 @@ tvcommentaire.setItems(List);
     }
 
     @FXML
-    private void UpdateCmntr(ActionEvent event) {
+      private void UpdateCmntr(ActionEvent event) {
+        if (ControleCmntr().length()>0){
          Alert alert =new Alert(Alert.AlertType.WARNING);
         alert.setTitle("confirmer la modification");
         alert.setContentText("voulez vous vraiment modifier");
-        alert.showAndWait();
+        alert.showAndWait();}
+        else if(detectBadWords()){
+         }
+         else{
          Commentaire r =new Commentaire();
          int idModifier=tvcommentaire.getSelectionModel().getSelectedItem().getId_com();
         r.setContenu(tfCmntr.getText());
        
         cmntr.updateCommentaire(idModifier, r);
-        showCommentaire();
-         // Get the index of the newly added row
-    int index = tvreclamation.getItems().size() - 1;
-
-    // Get the new row in the table view
-    ObservableList<Node> rows = tvreclamation.getChildrenUnmodifiable();
-    TableRow<Reclamation> newRow = (TableRow<Reclamation>) rows.get(index);
-
-    // Disable the new row
-   // newRow.setDisable(true);
-
-    // Schedule a task to enable the row after 5 minutes
-    ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    executor.schedule(() -> {
-        Platform.runLater(() -> newRow.setDisable(true));
-    }, 2, TimeUnit.MINUTES);
+        showCommentaire();}
+         
 }
+      public boolean detectBadWords() {
+        String[] badWords = { "bad", "ugly", "nasty" }; // replace with your own list of bad words
+        String comment = tfCmntr.getText().toLowerCase();
+        boolean hasBadWord = false;
+        for (String word : badWords) {
+            if (comment.contains(word)) {
+                hasBadWord = true;
+                break;
+            }
+        }
+        if (hasBadWord) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Your comment contains a bad word.");
+            alert.showAndWait();
+            return true;
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Your comment is good.");
+            alert.showAndWait();
+            return false ;
+        }
+    }
+   
+    
     
 
     @FXML
-    private void DeleteCmntr(ActionEvent event) {
-         Alert alert =new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("confirmer la suppression");
-        alert.setContentText("voulez vous vraiment supprimer ?");
-        alert.showAndWait();
-        int idSup=tvcommentaire.getSelectionModel().getSelectedItem().getId_com();
+  private void DeleteCmntr(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Confirm Deletion");
+    alert.setContentText("Are you sure you want to delete the selected item?");
+
+    ButtonType deleteButtonType = new ButtonType("Delete");
+    ButtonType cancelButtonType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+    alert.getButtonTypes().setAll(deleteButtonType, cancelButtonType);
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == deleteButtonType) {
+        int idSup = tvcommentaire.getSelectionModel().getSelectedItem().getId_com();
         cmntr.supprimerCommentaire(idSup);
         showCommentaire();
+    } else {
+        alert.close();
     }
+}
+
     private String ControleCmntr(){
 
     String erreur="";
@@ -375,6 +428,7 @@ private void exportToExcel(ActionEvent event) {
         headerRow.createCell(2).setCellValue("Prenom");
         headerRow.createCell(3).setCellValue("Adresse");
         headerRow.createCell(4).setCellValue("Contenu");
+        headerRow.createCell(5).setCellValue("dateCreation");
 
         // Add the data rows to the sheet
         int rowNum = 1;
@@ -385,6 +439,22 @@ private void exportToExcel(ActionEvent event) {
             row.createCell(2).setCellValue(reclamation.getPrenom());
             row.createCell(3).setCellValue(reclamation.getAdresse());
             row.createCell(4).setCellValue(reclamation.getContenu());
+            // create a Calendar instance and set it to the current date and time
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(reclamation.getDateCreation());
+
+        // get the last two digits of the year
+        int year = calendar.get(Calendar.YEAR) % 100;
+
+        // extract the month and day values from the Calendar instance
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+ 
+        // print the date in the format "yyyy-MM-dd"
+        String date=String.format("%02d-%02d-%02d", day, month, year);
+        
+            row.createCell(5).setCellValue(date);
         }
 
         // Write the workbook to the file
@@ -446,6 +516,21 @@ public void recherche_avance(){
                 .stream().sorted(Comparator.comparing(Reclamation::getDateCreation)).collect(Collectors.toList());
         ObservableList<Reclamation> triDate=FXCollections.observableArrayList(triParDate);
         tvreclamation.setItems(triDate);
+    }
+
+    @FXML
+    private void mail(ActionEvent event) {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/mail.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
     }
  
 }

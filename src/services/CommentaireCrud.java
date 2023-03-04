@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package services;
 
-import Entities.Commentaire;
+import interfaces.CommentaireInterface;
+import entities.Commentaire;
 
-import Utils.MyConnection;
+import utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +78,6 @@ public class CommentaireCrud implements CommentaireInterface<Commentaire> {
             
             while(rs.next()){
                   Commentaire p = new Commentaire();
-                       System.out.println(rs.getString("contenu"));
                 p.setId_com(rs.getInt("id_com"));
                 p.setContenu(rs.getString("contenu"));
                 myList.add(p);

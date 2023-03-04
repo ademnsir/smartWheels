@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package entities;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,12 +18,21 @@ public class Reclamation {
    private String Prenom;
    private String Adresse;
    private String Contenu;
+   private Date dateCreation;
     public Reclamation(int Id, String Nom, String Prenom, String Adresse, String Contenu) {
         this.Id = Id;
         this.Nom = Nom;
         this.Prenom = Prenom;
         this.Adresse = Adresse;
         this.Contenu = Contenu;
+    }
+
+    public Reclamation(String Nom, String Prenom, String Adresse, String Contenu, Date dateCreation) {
+        this.Nom = Nom;
+        this.Prenom = Prenom;
+        this.Adresse = Adresse;
+        this.Contenu = Contenu;
+        this.dateCreation = dateCreation;
     }
 
     public Reclamation() {
@@ -70,10 +80,22 @@ public class Reclamation {
         this.Contenu = Contenu;
     }
 
-   
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+ 
+
     @Override
     public String toString() {
-        return "Reclamation{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", Adresse=" + Adresse + ", Contenu=" + Contenu + '}';
+        return "Reclamation{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", Adresse=" + Adresse + ", Contenu=" + Contenu + ", dateCreation=" + dateCreation + '}';
     }
+
+   
+    
      
 }
