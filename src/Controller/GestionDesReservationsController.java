@@ -416,7 +416,7 @@ File file = fileChooser.showSaveDialog(null);
 
 // Ajoutez le logo de l'entreprise
 
-                Image logo = Image.getInstance("C:/Users/user/Desktop/clone/smartWheels/src/images/a.png");
+                Image logo = Image.getInstance("C:/Users/user/Desktop/copiec/smartWheels/src/images/a.png");
                 logo.scaleAbsolute(100, 100);
                 document.add(logo);
 // Ajoutez les informations de l'entreprise
