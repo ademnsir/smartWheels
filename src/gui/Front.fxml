@@ -5,7 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="983.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FrontController">
+=======
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="983.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet_transport.controler.FrontController">
+>>>>>>> master
    <children>
       <AnchorPane fx:id="anchor1" layoutX="2.0" prefHeight="100.0" prefWidth="1281.0" style="-fx-background-color: #52438F;">
          <children>

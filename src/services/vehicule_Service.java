@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import utils.MyConnexion;
+import utils.MyConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -36,7 +36,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
          String requete = "insert into vehicule values(?,?,?,?,?,?,?,?)";
                      try {
                       
-             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+             PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(requete);
              
              ps.setInt(1,v.getId());
              ps.setString(2,v.getMarque());
@@ -59,7 +59,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
 
         public void Supprimer_Vehicule(int id) {
           try {
-            PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("delete from vehicule where id=?");
+            PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("delete from vehicule where id=?");
             ps.setInt(1,id);
             ps.executeUpdate();
         } catch (Exception ex) {
@@ -73,7 +73,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
         ObservableList<Vehicule> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from vehicule");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from vehicule");
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -95,7 +95,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
          String requete = "update vehicule set marque=? ,vitesse_max=?,charge_maxsupp=?,auto_batterie=?,couleur=?,type_vehicule=?, prix=? where id=?";
                      try {
                       
-             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+             PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(requete);
              
             
              ps.setString(1,v.getMarque());
@@ -118,7 +118,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
         ObservableList<String> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select id from vehicule");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from vehicule");
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -138,7 +138,7 @@ public class vehicule_Service implements VehiculeCRUD<Vehicule> {
         Vehicule v=new Vehicule();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from vehicule where id=?");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from vehicule where id=?");
           ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
          while (rs.next())

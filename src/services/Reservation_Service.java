@@ -20,7 +20,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import utils.MyConnexion;
+import utils.MyConnection;
 
 /**
  *
@@ -47,17 +47,19 @@ public class Reservation_Service {
 public void ajouter_reservation(Reservation r)
         
 {
-         String requete = "insert into reservation values(?,?,?,?)";
+         String requete = "insert into reservation values(?,?,?,?,?,?)";
                      try {
                       
-             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+             PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(requete);
    
           
-             ps.setInt(1,r.getId_res());
+            ps.setInt(1,0);
              ps.setString(2,r.getDate_debut()  );
              ps.setString(3,r.getDate_fin()  );
            
              ps.setFloat(4,calculmontant(r.getDate_debut(),r.getDate_fin()));
+             ps.setInt(5,r.getId_v());
+             ps.setInt(6, r.getId_client());
               
              ps.executeUpdate();          
            
@@ -82,7 +84,7 @@ public void ajouter_reservation(Reservation r)
         ObservableList<String> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select id_res from reservation");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id_res from reservation");
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -101,7 +103,7 @@ public void ajouter_reservation(Reservation r)
         Reservation r= new Reservation();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where id_res=?");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation where id_res=?");
           ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
          while (rs.next())
@@ -131,7 +133,7 @@ public void ajouter_reservation(Reservation r)
         ObservableList<Reservation> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation");
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -156,7 +158,7 @@ public void ajouter_reservation(Reservation r)
          String requete = "update reservation set date_debut=? ,date_fin=?,montant=? where id_res=?";
                      try {
                       
-             PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(requete);
+             PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(requete);
              
             
              ps.setString(1,r.getDate_debut());
@@ -179,7 +181,7 @@ public void ajouter_reservation(Reservation r)
                
                public void Supprimer_reservation(int id_res) {
           try {
-            PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("delete from reservation where id_res=?");
+            PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("delete from reservation where id_res=?");
             ps.setInt(1,id_res);
             ps.executeUpdate();
         } catch (Exception ex) {
@@ -195,7 +197,7 @@ public void ajouter_reservation(Reservation r)
         ObservableList<Reservation> data=FXCollections.observableArrayList();
         try
         {
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where date=TO_DATE(?, 'YYYY-MM-DD')");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation where date=TO_DATE(?, 'YYYY-MM-DD')");
         ps.setString(1, date);
         ResultSet rs=ps.executeQuery();
             while (rs.next())

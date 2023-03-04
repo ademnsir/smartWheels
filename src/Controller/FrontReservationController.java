@@ -10,7 +10,13 @@ package Controller;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import entities.Reservation;
+<<<<<<< HEAD
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+=======
+import java.io.IOException;
+>>>>>>> master
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,15 +37,27 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+<<<<<<< HEAD
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
+=======
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+>>>>>>> master
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import services.Reservation_Service;
-import utils.MyConnexion;
+import utils.MyConnection;
 
 /**
  * FXML Controller class
@@ -55,8 +73,11 @@ public class FrontReservationController implements Initializable {
     private Pane left;
     @FXML
     private Button back;
- 
     @FXML
+<<<<<<< HEAD
+    private GridPane gridpane;
+    private Button resev;
+=======
     private Label marquelabel1;
     @FXML
     private Label marquelabel2;
@@ -80,6 +101,7 @@ public class FrontReservationController implements Initializable {
     private Label id_vehicule1;
     @FXML
     private Label id_vehicule2;
+>>>>>>> master
  
 
     /**
@@ -88,6 +110,9 @@ public class FrontReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+<<<<<<< HEAD
+        this.setPane();
+=======
 //Affichage des donneés de la base  sur  le front
            String selectQuery = "SELECT id, marque ,couleur,vitesse_max FROM vehicule WHERE id = ?";
         try {
@@ -125,6 +150,7 @@ public class FrontReservationController implements Initializable {
             e.printStackTrace();
         }    
           
+>>>>>>> master
 
     }    
 
@@ -145,7 +171,6 @@ public class FrontReservationController implements Initializable {
               
     }
 
-    @FXML
     private void ajouter(ActionEvent event) {
      
   
@@ -162,6 +187,8 @@ champDateDebut.setPromptText("YYYY-MM-DD");
 DatePicker champDateFin = new DatePicker();
 champDateFin.setPromptText("YYYY-MM-DD");
 
+<<<<<<< HEAD
+=======
 
 // Création du GridPane pour les champs de saisie
 GridPane grid = new GridPane();
@@ -180,6 +207,7 @@ grid.add(champDateFin, 1, 2);
 // Ajout du GridPane à l'alerte
 alert.getDialogPane().setContent(grid);
 
+>>>>>>> master
 // Affichage de l'alerte et récupération des valeurs saisies
 Optional<ButtonType> result = alert.showAndWait();
 if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -220,6 +248,124 @@ if (result.isPresent() && result.get() == ButtonType.OK) {
 }
 
     }
+    private ImageView createImageView(String marque)
+    {
+          ImageView iamageView = new ImageView();
+        try{
+        // create an input stream from a file path
+        InputStream stream = null;
+        if (marque.equals("Xiaomi"))
+        {
+         stream = new FileInputStream("C:/Users/aziz/Desktop/clone/smartWheels/src/images/Xiaomi.png");
+        }
+        else if(marque.equals("NIU"))
+        {
+          stream = new FileInputStream("C:/Users/aziz/Desktop/clone/smartWheels/src/images/NIU.png");   
+        }
+        else if(marque.equals("IsinWheel"))
+        {
+             stream = new FileInputStream("C:/Users/aziz/Desktop/clone/smartWheels/src/images/IsinWheel.png");   
+        }
+
+// create an Image object from the input stream
+Image image = new Image(stream);
+
+// create an ImageView to display the image
+ImageView imageView = new ImageView(image);
+
+        // set the position and size of the ImageView
+        imageView.setX(50);
+        imageView.setY(10);
+        imageView.setFitWidth(150);
+        imageView.setFitHeight(150);
+        return imageView;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+         return  iamageView;
+    }
+     private Label createLabel(int posx,int posy,String content) {
+         Label label=new Label();
+         label.setTranslateX(posx);
+         label.setTranslateY(posy);
+         label.setText(content);
+         return  label;       
+     }
+     private Button crateButton()
+     {
+       Button bt=new Button("Valider"); 
+       bt.setTranslateY(200);
+       bt.setTranslateX(100);
+       return bt;
+     }
+   private Pane createPane(String marque,String couleur,String vitesse) {
+    Pane pane = new Pane();
+    pane.setPrefHeight(250);
+    pane.setPrefWidth(250);
+    pane.setStyle("-fx-background-color: #6F5CC2;");
+    pane.getChildren().add(this.createImageView(marque));
+    pane.getChildren().add(this.createLabel(0,0,"Marque:"+marque));
+    pane.getChildren().add(this.createLabel(0,100,"Couleur:"+couleur));
+    pane.getChildren().add(this.createLabel(100,100,"Vitesse:"+vitesse));
+    pane.getChildren().add(this.crateButton());
+    return pane;
+}
+    public void setPane()
+    {
+      //Affichage des donneés de la base  sur  le front
+          for (ColumnConstraints column : gridpane.getColumnConstraints()) {
+    column.setFillWidth(false);
+}
+
+// désactiver le remplissage automatique des lignes
+for (RowConstraints row : gridpane.getRowConstraints()) {
+    row.setFillHeight(false);
+}
+        try {
+            String selectQuery = "SELECT id, marque ,couleur,vitesse_max FROM vehicule ";
+         
+           PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(selectQuery);
+           ResultSet resultSet = ps.executeQuery();
+            for (int i = 0; i <4; i++) {
+                 for (int j = 0; j <3; j++) {
+                 
+              
+               
+                if (resultSet.next()) {
+                    String marque = resultSet.getString("marque");
+                    String couleur = resultSet.getString("couleur");
+                    String vitesse_max = resultSet.getString("vitesse_max");
+                   
+                      gridpane.add(this.createPane(marque,couleur,vitesse_max),j,i);
+                        
+                }
+                        
+                        //test.getChildren().add(resev);
+                        //test2.getChildren().add(resev);
+                       
+                       
+                       
+                        
+                   
+                
+                }
+                
+               
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }    
+
+// Copy the children of the original pane to the copied pane
+
+
+
+    }
+
+   
     
     
 

@@ -19,6 +19,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Reservation;
+import entities.Utilisateur;
 import entities.Vehicule;
 
 import java.awt.Desktop;
@@ -68,8 +69,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import services.Reservation_Service;
+import services.UtilisateurS;
 import services.vehicule_Service;
+<<<<<<< HEAD
+import utils.MyConnection;
+=======
 import utils.MyConnexion;
+>>>>>>> master
 
 /**
  * FXML Controller class
@@ -79,14 +85,10 @@ import utils.MyConnexion;
 public class GestionDesReservationsController implements Initializable {
 
     @FXML
-    private AnchorPane contentArea;
-    @FXML
     private Pane left;
 
     @FXML
     private TableView<Reservation> tab;
-    @FXML
-    private Button vehicule;
     @FXML
     private Button supprimer_reservation;
     @FXML
@@ -99,7 +101,10 @@ public class GestionDesReservationsController implements Initializable {
     private TableColumn<?, ?> coldd_r;
     @FXML
     private TableColumn<?, ?> coldf_r;
+<<<<<<< HEAD
+=======
     private TextField id_res;
+>>>>>>> master
     @FXML
     private DatePicker date_debut;
     @FXML
@@ -127,6 +132,11 @@ public class GestionDesReservationsController implements Initializable {
     private ComboBox<String> id_client;
     @FXML
     private ComboBox<String> id_veh;
+<<<<<<< HEAD
+    @FXML
+    private AnchorPane anchor;
+=======
+>>>>>>> master
 
     /**
      * Initializes the controller class.
@@ -141,6 +151,12 @@ public class GestionDesReservationsController implements Initializable {
         this.afficher();
  
         
+<<<<<<< HEAD
+        
+ 
+        
+=======
+>>>>>>> master
         //liste deroulante mois reservation bar recherche
 ObservableList<String> moisList = FXCollections.observableArrayList("Janvier                                                              ","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
 
@@ -148,14 +164,26 @@ ObservableList<String> moisList = FXCollections.observableArrayList("Janvier    
 choiceBoxMois.setItems(moisList);
 
 this.combo_boxs();
+<<<<<<< HEAD
+        UtilisateurS us=new UtilisateurS();
+        ObservableList<Utilisateur>u=us.afficher();
+       ObservableList<String> list = FXCollections.observableArrayList();
+        for (int i=0;i<u.size();i++)
+        {
+            list.add(String.valueOf(u.get(i).getId())); 
+        }
+        id_client.setItems(list);
+    
+=======
 
+>>>>>>> master
 
     }
 public void SetAllTextField()
    {
       Reservation_Service rs= new Reservation_Service(); 
      Reservation r=tab.getSelectionModel().getSelectedItem();
-      id_res.setText(Integer.toString(r.getId_res()));
+      
       
       date_debut.setValue(LOCAL_DATE(r.getDate_debut()));
       date_fin.setValue(LOCAL_DATE(r.getDate_fin()));
@@ -165,7 +193,6 @@ public void SetAllTextField()
 
 
 
-    @FXML
     private void btn_vehicule(ActionEvent event) throws IOException {
          try{
          Parent root = FXMLLoader.load(getClass().getResource("/gui/GestionDesVehicules.fxml"));  
@@ -218,14 +245,14 @@ public void SetAllTextField()
 
     @FXML
     private void modifier_reservation(ActionEvent event) {
-                      if(!(id_res.getText().equals("") || date_debut.getValue().equals("")  || date_fin.getValue().equals("")))
+                      if(!(id_veh.getValue().toString().equals("") || date_debut.getValue().equals("")  || date_fin.getValue().equals("")))
                 {
                 
        Reservation_Service resS=new Reservation_Service();
         
-        Reservation r_enregistre=resS.GetUserById(Integer.parseInt(id_res.getText()));
+        Reservation r_enregistre=resS.GetUserById(Integer.parseInt(id_veh.getValue().toString()));
         
-        Reservation r= new Reservation(Integer.parseInt(id_res.getText()),date_debut.getValue().toString(),date_fin.getValue().toString());
+        Reservation r= new Reservation(0,date_debut.getValue().toString(),date_fin.getValue().toString());
            
                  
          if (!(r.getId_res()==(r_enregistre.getId_res()) 
@@ -271,7 +298,7 @@ public void SetAllTextField()
         
              
         //if different ll vide ->ajouter 
-       if(!(id_res.getText().equals("") || date_debut.getValue().equals("")  || date_fin.getValue().equals("")))
+       if(!(date_debut.getValue().equals("")  || date_fin.getValue().equals("")))
                 {
           
 try {
@@ -289,7 +316,11 @@ try {
     
     else {
         Reservation_Service s=new Reservation_Service();
+<<<<<<< HEAD
+        Reservation r = new Reservation(0, dateDebut.toString(), dateFin.toString(),s.calculmontant(dateDebut.toString(), dateFin.toString()),Integer.parseInt(id_veh.getValue().toString()),Integer.parseInt(id_client.getValue().toString()));
+=======
         Reservation r = new Reservation(Integer.parseInt(id_res.getText()), dateDebut.toString(), dateFin.toString(),s.calculmontant(dateDebut.toString(), dateFin.toString()),Integer.parseInt(id_veh.getValue().toString()),Integer.parseInt(id_client.getValue().toString()));
+>>>>>>> master
     Reservation_Service a = new Reservation_Service();
     a.ajouter_reservation(r);
      a.afficher_reservation();
@@ -396,7 +427,11 @@ private void impressionpdf(ActionEvent event) {
 
                 // Afficher une boîte de dialogue de sauvegarde pour spécifier le nom et l'emplacement du fichier PDF
              FileChooser fileChooser = new FileChooser();
+<<<<<<< HEAD
+fileChooser.setInitialDirectory(new File("C:/Users/aziz/Desktop")); // définir le répertoire initial ici
+=======
 fileChooser.setInitialDirectory(new File("C:/Users/user/Desktop")); // définir le répertoire initial ici
+>>>>>>> master
 fileChooser.setTitle("Enregistrer le fichier PDF");
 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF (*.pdf)", "*.pdf"));
 File file = fileChooser.showSaveDialog(null);
@@ -416,7 +451,11 @@ File file = fileChooser.showSaveDialog(null);
 
 // Ajoutez le logo de l'entreprise
 
+<<<<<<< HEAD
+                Image logo = Image.getInstance("C:/Users/aziz/Desktop/clone/smartWheels/src/images/a.png");
+=======
                 Image logo = Image.getInstance("C:/Users/user/Desktop/clone/smartWheels/src/images/a.png");
+>>>>>>> master
                 logo.scaleAbsolute(100, 100);
                 document.add(logo);
 // Ajoutez les informations de l'entreprise
@@ -535,7 +574,11 @@ private void recherche_Reservation(ActionEvent event) {
         DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dateDebut = inputFormat.parse(mois);
         String dateDebutStr = outputFormat.format(dateDebut);
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+=======
         PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+>>>>>>> master
         ps.setString(1, dateDebutStr);
         ResultSet rs=ps.executeQuery();
         
@@ -578,6 +621,52 @@ this.afficher();
       id_veh.setItems(options);
       id_veh.setPromptText("Entrer votre vehicule");
     }
+<<<<<<< HEAD
+
+    @FXML
+    private void utilisateur(ActionEvent event) {
+         try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/gestion_utilisateur.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
+
+    @FXML
+    private void home(ActionEvent event) {
+    }
+
+    @FXML
+    private void Reservation(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void Vehicule(ActionEvent event) {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/GestionDesVehicules.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
+
+    @FXML
+    private void Deconnexion(ActionEvent event) {
+    }
+=======
+>>>>>>> master
     
 
 }

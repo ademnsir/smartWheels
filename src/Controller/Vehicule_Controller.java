@@ -368,6 +368,26 @@ private void cherchee(ActionEvent event) {
             // select the row
             tab.getSelectionModel().select(i);
         }
+<<<<<<< HEAD
+    }
+}
+
+    @FXML
+    private void utilisateur(ActionEvent event) 
+    {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/gestion_utilisateur.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+=======
+>>>>>>> master
     }
 }
 

@@ -3,12 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
+package interfaces;
+=======
 package projet_transport.interfaces;
+>>>>>>> master
 
 import java.util.ArrayList;
 import java.util.Map;
 import javafx.collections.ObservableList;
+<<<<<<< HEAD
+import entities.Utilisateur;
+=======
 import projet_transport.model.Utilisateur;
+>>>>>>> master
 
 /**
  *

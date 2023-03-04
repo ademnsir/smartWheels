@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
+package Controller;
+=======
 package projet_transport.controler;
+>>>>>>> master
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.Color;
@@ -80,6 +84,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+<<<<<<< HEAD
+import static Controller.loginController.containsOnlyLetters;
+import static Controller.loginController.containsOnlyNumber;
+import static Controller.loginController.isEmailValid;
+import entities.Carte_fidelite;
+import entities.Utilisateur;
+import services.Carte_fideliteS;
+import services.UtilisateurS;
+
+=======
 import static projet_transport.controler.loginController.containsOnlyLetters;
 import static projet_transport.controler.loginController.containsOnlyNumber;
 import static projet_transport.controler.loginController.isEmailValid;
@@ -88,6 +102,7 @@ import projet_transport.model.Utilisateur;
 import projet_transport.services.Carte_fideliteS;
 import projet_transport.services.UtilisateurS;
 import projet_transport.utils.MyConnexion;
+>>>>>>> master
 
 /**
  * FXML Controller class
@@ -238,7 +253,11 @@ public class Gestion_UtilisateurController implements Initializable {
     private void home(ActionEvent event) {
         
          try{
+<<<<<<< HEAD
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/login.fxml"));  
+=======
          Parent root = FXMLLoader.load(getClass().getResource("/projet_transport/views/login.fxml"));  
+>>>>>>> master
          Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -756,7 +775,11 @@ public class Gestion_UtilisateurController implements Initializable {
     @FXML
     private void Go_to_front(ActionEvent event) {
           try{
+<<<<<<< HEAD
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/Front.fxml"));  
+=======
          Parent root = FXMLLoader.load(getClass().getResource("/projet_transport/views/Front.fxml"));  
+>>>>>>> master
          Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -777,7 +800,11 @@ public class Gestion_UtilisateurController implements Initializable {
     @FXML
     private void Deconnexion(ActionEvent event) {
         try{
+<<<<<<< HEAD
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/login.fxml"));  
+=======
          Parent root = FXMLLoader.load(getClass().getResource("/projet_transport/views/login.fxml"));  
+>>>>>>> master
          Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -887,4 +914,52 @@ public class Gestion_UtilisateurController implements Initializable {
          piechart.setLabelsVisible(false);
         this.statistique();
     }
+<<<<<<< HEAD
+
+    @FXML
+    private void Reservation(ActionEvent event) {
+        try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/GestionDesReservations.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
+
+    @FXML
+    private void Vehicule(ActionEvent event) {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/GestionDesVehicules.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
+
+    @FXML
+    private void Reclamation(ActionEvent event) {
+         try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/FXMLDocument.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+    }
+=======
+>>>>>>> master
 }
