@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD
 package Controller;
+=======
+package projet_transport.controler;
+>>>>>>> master
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import static java.awt.SystemColor.text;
@@ -48,11 +52,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+<<<<<<< HEAD
 import Controller.FrontClientController;
 import Controller.FrontController;
 import Controller.Gestion_UtilisateurController;
 import entities.Utilisateur;
 import services.UtilisateurS;
+=======
+import projet_transport.controler.FrontClientController;
+import projet_transport.controler.FrontController;
+import projet_transport.controler.Gestion_UtilisateurController;
+import projet_transport.model.Utilisateur;
+import projet_transport.services.UtilisateurS;
+>>>>>>> master
 import java.util.Properties;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Font;
@@ -66,7 +78,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+<<<<<<< HEAD
 import utils.IPAddress;
+=======
+import projet_transport.utils.IPAddress;
+>>>>>>> master
 
 /**
  *
@@ -184,7 +200,17 @@ public class loginController implements Initializable {
             lb_vide.setVisible(false);
             right.setVisible(false);
             layout2.setVisible(false);
+<<<<<<< HEAD
             
+=======
+             try { 
+                 System.out.println(InetAddress.getLocalHost().getHostAddress());
+            System.out.println(IPAddress.checkIpAdress(InetAddress.getLocalHost().getHostAddress()));
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+>>>>>>> master
     }    
 
     @FXML
@@ -284,6 +310,7 @@ public class loginController implements Initializable {
 
     @FXML
     private void connexion(ActionEvent event) throws IOException {
+<<<<<<< HEAD
         boolean ip=true;
          try { 
                 
@@ -292,6 +319,8 @@ public class loginController implements Initializable {
             Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+=======
+>>>>>>> master
         UtilisateurS userS=new UtilisateurS();
         if (!(c_email.getText().equals("") || c_passe.getText().equals("")))
         {
@@ -300,6 +329,7 @@ public class loginController implements Initializable {
              
                if (userS.CheckUserAdmin(c_email.getText()) )
                {
+<<<<<<< HEAD
                    if (ip)
                    
                    {
@@ -307,6 +337,12 @@ public class loginController implements Initializable {
                {
                Gestion_UtilisateurController.SetLoginData(c_email.getText(),c_passe.getText());     
                Parent root = FXMLLoader.load(getClass().getResource("/gui/gestion_utilisateur.fxml"));  
+=======
+               try
+               {
+               Gestion_UtilisateurController.SetLoginData(c_email.getText(),c_passe.getText());     
+               Parent root = FXMLLoader.load(getClass().getResource("/projet_transport/views/gestion_utilisateur.fxml"));  
+>>>>>>> master
                Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                Scene scene = new Scene(root);
                stage.setScene(scene);
@@ -317,6 +353,7 @@ public class loginController implements Initializable {
                {
                System.out.println("Probleme:"+e);
                }
+<<<<<<< HEAD
                    }
                    else 
                    {
@@ -325,11 +362,17 @@ public class loginController implements Initializable {
                     al.setHeaderText("Notre application n'est pas disponible dans votre region");
                     al.showAndWait();
                    }
+=======
+>>>>>>> master
                }
                else 
                {
                FrontClientController.SetLoginData(c_email.getText(),c_passe.getText());
+<<<<<<< HEAD
                Parent root = FXMLLoader.load(getClass().getResource("/gui/FrontClient.fxml"));  
+=======
+               Parent root = FXMLLoader.load(getClass().getResource("/projet_transport/views/FrontClient.fxml"));  
+>>>>>>> master
                Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
                Scene scene = new Scene(root);
                stage.setScene(scene);

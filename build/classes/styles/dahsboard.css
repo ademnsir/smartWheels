@@ -11,3 +11,7 @@
 .button:pressed{
     -fx-background-color: #7156DD;
 }
+
+.table-row-cell {
+    -fx-min-height: 25px;
+}

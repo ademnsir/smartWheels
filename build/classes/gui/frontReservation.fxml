@@ -48,6 +48,11 @@
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>
                         </Label>
+                        <Label fx:id="id_vehicule" layoutX="41.0" layoutY="359.0" prefHeight="37.0" prefWidth="181.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                   <Pane layoutX="325.0" layoutY="125.0" prefHeight="469.0" prefWidth="276.0" style="-fx-background-color: #52438F;">
@@ -84,6 +89,11 @@
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>
                         </Label>
+                        <Label fx:id="id_vehicule1" layoutX="48.0" layoutY="369.0" prefHeight="37.0" prefWidth="181.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                   <Pane layoutX="636.0" layoutY="128.0" prefHeight="469.0" prefWidth="289.0" style="-fx-background-color: #52438F;">
@@ -109,6 +119,11 @@
                            </font>
                         </Label>
                         <Label fx:id="vitesselabel3" layoutX="41.0" layoutY="309.0" prefHeight="37.0" prefWidth="181.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="id_vehicule2" layoutX="41.0" layoutY="367.0" prefHeight="37.0" prefWidth="181.0" textFill="WHITE">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>

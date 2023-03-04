@@ -12,7 +12,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="595.0" prefWidth="1005.0" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.loginController">
+=======
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="595.0" prefWidth="1005.0" stylesheets="@../styles/login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet_transport.controler.loginController">
+>>>>>>> master
     <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="547.0" prefWidth="934.0">
          <children>

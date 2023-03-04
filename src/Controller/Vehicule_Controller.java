@@ -368,6 +368,7 @@ private void cherchee(ActionEvent event) {
             // select the row
             tab.getSelectionModel().select(i);
         }
+<<<<<<< HEAD
     }
 }
 
@@ -385,7 +386,10 @@ private void cherchee(ActionEvent event) {
         {
             System.out.println("Probleme:"+e);
         }
+=======
+>>>>>>> master
     }
+}
 
 
     }

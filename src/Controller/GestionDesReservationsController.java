@@ -71,7 +71,11 @@ import org.controlsfx.control.textfield.TextFields;
 import services.Reservation_Service;
 import services.UtilisateurS;
 import services.vehicule_Service;
+<<<<<<< HEAD
 import utils.MyConnection;
+=======
+import utils.MyConnexion;
+>>>>>>> master
 
 /**
  * FXML Controller class
@@ -97,6 +101,10 @@ public class GestionDesReservationsController implements Initializable {
     private TableColumn<?, ?> coldd_r;
     @FXML
     private TableColumn<?, ?> coldf_r;
+<<<<<<< HEAD
+=======
+    private TextField id_res;
+>>>>>>> master
     @FXML
     private DatePicker date_debut;
     @FXML
@@ -124,8 +132,11 @@ public class GestionDesReservationsController implements Initializable {
     private ComboBox<String> id_client;
     @FXML
     private ComboBox<String> id_veh;
+<<<<<<< HEAD
     @FXML
     private AnchorPane anchor;
+=======
+>>>>>>> master
 
     /**
      * Initializes the controller class.
@@ -138,10 +149,14 @@ public class GestionDesReservationsController implements Initializable {
         SetAllTextField();
         });
         this.afficher();
+ 
         
+<<<<<<< HEAD
         
  
         
+=======
+>>>>>>> master
         //liste deroulante mois reservation bar recherche
 ObservableList<String> moisList = FXCollections.observableArrayList("Janvier                                                              ","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
 
@@ -149,6 +164,7 @@ ObservableList<String> moisList = FXCollections.observableArrayList("Janvier    
 choiceBoxMois.setItems(moisList);
 
 this.combo_boxs();
+<<<<<<< HEAD
         UtilisateurS us=new UtilisateurS();
         ObservableList<Utilisateur>u=us.afficher();
        ObservableList<String> list = FXCollections.observableArrayList();
@@ -158,6 +174,9 @@ this.combo_boxs();
         }
         id_client.setItems(list);
     
+=======
+
+>>>>>>> master
 
     }
 public void SetAllTextField()
@@ -297,7 +316,11 @@ try {
     
     else {
         Reservation_Service s=new Reservation_Service();
+<<<<<<< HEAD
         Reservation r = new Reservation(0, dateDebut.toString(), dateFin.toString(),s.calculmontant(dateDebut.toString(), dateFin.toString()),Integer.parseInt(id_veh.getValue().toString()),Integer.parseInt(id_client.getValue().toString()));
+=======
+        Reservation r = new Reservation(Integer.parseInt(id_res.getText()), dateDebut.toString(), dateFin.toString(),s.calculmontant(dateDebut.toString(), dateFin.toString()),Integer.parseInt(id_veh.getValue().toString()),Integer.parseInt(id_client.getValue().toString()));
+>>>>>>> master
     Reservation_Service a = new Reservation_Service();
     a.ajouter_reservation(r);
      a.afficher_reservation();
@@ -404,7 +427,11 @@ private void impressionpdf(ActionEvent event) {
 
                 // Afficher une boîte de dialogue de sauvegarde pour spécifier le nom et l'emplacement du fichier PDF
              FileChooser fileChooser = new FileChooser();
+<<<<<<< HEAD
 fileChooser.setInitialDirectory(new File("C:/Users/aziz/Desktop")); // définir le répertoire initial ici
+=======
+fileChooser.setInitialDirectory(new File("C:/Users/user/Desktop")); // définir le répertoire initial ici
+>>>>>>> master
 fileChooser.setTitle("Enregistrer le fichier PDF");
 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF (*.pdf)", "*.pdf"));
 File file = fileChooser.showSaveDialog(null);
@@ -424,7 +451,11 @@ File file = fileChooser.showSaveDialog(null);
 
 // Ajoutez le logo de l'entreprise
 
+<<<<<<< HEAD
                 Image logo = Image.getInstance("C:/Users/aziz/Desktop/clone/smartWheels/src/images/a.png");
+=======
+                Image logo = Image.getInstance("C:/Users/user/Desktop/clone/smartWheels/src/images/a.png");
+>>>>>>> master
                 logo.scaleAbsolute(100, 100);
                 document.add(logo);
 // Ajoutez les informations de l'entreprise
@@ -543,7 +574,11 @@ private void recherche_Reservation(ActionEvent event) {
         DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dateDebut = inputFormat.parse(mois);
         String dateDebutStr = outputFormat.format(dateDebut);
+<<<<<<< HEAD
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+=======
+        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+>>>>>>> master
         ps.setString(1, dateDebutStr);
         ResultSet rs=ps.executeQuery();
         
@@ -586,6 +621,7 @@ this.afficher();
       id_veh.setItems(options);
       id_veh.setPromptText("Entrer votre vehicule");
     }
+<<<<<<< HEAD
 
     @FXML
     private void utilisateur(ActionEvent event) {
@@ -629,6 +665,8 @@ this.afficher();
     @FXML
     private void Deconnexion(ActionEvent event) {
     }
+=======
+>>>>>>> master
     
 
 }
