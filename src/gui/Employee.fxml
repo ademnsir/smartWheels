@@ -44,10 +44,10 @@
             <TableColumn fx:id="t_dispo" prefWidth="84.0" text="disponibilite" />
          </columns>
       </TableView>
-      <Button layoutX="77.0" layoutY="434.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Ajouter" />
-      <Button layoutX="178.0" layoutY="434.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Modifier" />
-      <Button layoutX="273.0" layoutY="434.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Supprimer" />
-      <Button layoutX="536.0" layoutY="99.0" mnemonicParsing="false" onAction="#mail" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: #A16AE8;" text="Envoyer mail a tous les employés" />
-      <Button layoutX="571.0" layoutY="448.0" mnemonicParsing="false" onAction="#btnNotif" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: #A16AE8;" text="Notifier" />
+      <Button layoutX="17.0" layoutY="466.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Ajouter" />
+      <Button layoutX="118.0" layoutY="466.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Modifier" />
+      <Button layoutX="213.0" layoutY="466.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #A16AE8;" text="Supprimer" />
+      <Button layoutX="505.0" layoutY="420.0" mnemonicParsing="false" onAction="#mail" prefHeight="26.0" prefWidth="234.0" style="-fx-background-color: #A16AE8;" text="Envoyer un mail à tous les employés" />
+      <Button fx:id="btnNotif" layoutX="605.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnNotif" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: #A16AE8;" text="Notifier" />
     </children>
 </AnchorPane>

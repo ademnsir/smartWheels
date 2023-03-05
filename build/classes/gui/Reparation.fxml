@@ -20,7 +20,7 @@
         <tabs>
           <Tab text="Reparation">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="1159.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="1159.0" style="-fx-background-color: #EAE7FA;">
                      <children>
                         <TableView fx:id="affichage" layoutX="444.0" layoutY="208.0" prefHeight="280.0" prefWidth="555.0">
                           <columns>
@@ -33,9 +33,9 @@
                               <TableColumn fx:id="t_idveh" prefWidth="106.4000244140625" text="id_veh" />
                           </columns>
                         </TableView>
-                        <Button layoutX="260.0" layoutY="549.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="39.0" prefWidth="109.0" text="Supprimer" />
-                        <Button layoutX="139.0" layoutY="549.0" mnemonicParsing="false" onAction="#modifier" prefHeight="39.0" prefWidth="102.0" text="Modifier" />
-                        <Button layoutX="20.0" layoutY="549.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="39.0" prefWidth="101.0" text="Ajouter" />
+                        <Button layoutX="260.0" layoutY="549.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #A16AE8;" text="Supprimer" />
+                        <Button layoutX="139.0" layoutY="549.0" mnemonicParsing="false" onAction="#modifier" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #A16AE8;" text="Modifier" />
+                        <Button layoutX="20.0" layoutY="549.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: #A16AE8;" text="Ajouter" />
                         <Label layoutX="37.0" layoutY="268.0" text="Identifiant:" visible="false" />
                         <Label layoutX="35.0" layoutY="437.0" text="Date manutention:" />
                         <Label layoutX="35.0" layoutY="393.0" text="Date reparation:" />
@@ -47,13 +47,13 @@
                         <DatePicker fx:id="date_reparation" layoutX="193.0" layoutY="398.0" />
                         <DatePicker fx:id="date_defecation" layoutX="193.0" layoutY="476.0" />
                         <DatePicker fx:id="date_manutention" layoutX="193.0" layoutY="433.0" />
-                        <Label layoutX="368.0" layoutY="90.0" prefHeight="46.0" prefWidth="190.0" text="  Reparation" textAlignment="CENTER" textFill="#21b92b">
+                        <Label layoutX="368.0" layoutY="90.0" prefHeight="46.0" prefWidth="190.0" text="  Réparation" textAlignment="CENTER" textFill="#9e37d1fa">
                            <font>
                               <Font name="System Bold" size="30.0" />
                            </font>
                         </Label>
                         <TabPane layoutX="90.0" layoutY="18.0" prefHeight="230.0" prefWidth="390.0" tabClosingPolicy="UNAVAILABLE" />
-                        <TextField fx:id="id_veh" layoutX="185.0" layoutY="255.0" />
+                        <TextField fx:id="id_veh" layoutX="193.0" layoutY="255.0" />
                      </children>
                   </AnchorPane>
             </content>

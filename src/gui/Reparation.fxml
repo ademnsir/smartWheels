@@ -33,9 +33,9 @@
                               <TableColumn fx:id="t_idveh" prefWidth="106.4000244140625" text="id_veh" />
                           </columns>
                         </TableView>
-                        <Button layoutX="260.0" layoutY="549.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #A16AE8;" text="Supprimer" />
-                        <Button layoutX="139.0" layoutY="549.0" mnemonicParsing="false" onAction="#modifier" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #A16AE8;" text="Modifier" />
-                        <Button layoutX="20.0" layoutY="549.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: #A16AE8;" text="Ajouter" />
+                        <Button layoutX="822.0" layoutY="548.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #A16AE8;" text="Supprimer" />
+                        <Button layoutX="701.0" layoutY="548.0" mnemonicParsing="false" onAction="#modifier" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: #A16AE8;" text="Modifier" />
+                        <Button layoutX="582.0" layoutY="548.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="39.0" prefWidth="101.0" style="-fx-background-color: #A16AE8;" text="Ajouter" />
                         <Label layoutX="37.0" layoutY="268.0" text="Identifiant:" visible="false" />
                         <Label layoutX="35.0" layoutY="437.0" text="Date manutention:" />
                         <Label layoutX="35.0" layoutY="393.0" text="Date reparation:" />

@@ -31,6 +31,8 @@ import java.util.Observable;
 import java.util.Properties;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -80,6 +82,8 @@ public class EmployeeController implements Initializable {
     private TableColumn<Employee, String> t_dispo;
     @FXML
     private ComboBox<String> dispo;
+    @FXML
+    private Button btnNotif;
 
     /**
      * Initializes the controller class.
@@ -250,15 +254,27 @@ for (int i=0;i<myList.size();i++)
 
     }
     @FXML
-    public void btnNotif (ActionEvent event){
-        Image image=new Image("/image/images.png");
-        Notifications notifications=Notifications.create();
-        notifications.graphic(new ImageView(image));
-        notifications.text("le véhicule est reparé !");
-        notifications.title("Notification");
-        notifications.hideAfter(Duration.seconds(4));
-        notifications.show();
-    
+     private void btnNotif(ActionEvent event) {
+         try{
+         Image image = new Image("file:///C:/Users/yosra/Documents/NetBeansProjects/Projet_transport/src/images/b.png");
+ImageView imageView = new ImageView(image);
+imageView.setFitWidth(50); // Définit la largeur de l'image à 50 pixels
+Notifications notifications = Notifications.create()
+    .graphic(imageView)
+    .title("Notification")
+    .text("Le véhicule est réparé !")
+    .hideAfter(Duration.seconds(4))
+    .position(Pos.BOTTOM_RIGHT);
+
+notifications.show();
+
+        
+         }
+         catch (Exception e)
+         {
+         
+             System.out.println(e);
+         }
     }
       
 
