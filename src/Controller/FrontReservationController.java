@@ -7,9 +7,12 @@
 //adem
 package Controller;
 
+import static Controller.Gestion_UtilisateurController.l_email;
+import com.jfoenix.controls.JFXButton;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import entities.Reservation;
+import entities.Utilisateur;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -45,7 +49,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import services.Reservation_Service;
-import utils.MyConnexion;
+import services.UtilisateurS;
+import utils.MyConnection;
 
 /**
  * FXML Controller class
@@ -54,7 +59,7 @@ import utils.MyConnexion;
  */
 public class FrontReservationController implements Initializable {
   public static final String ACCOUNT_SID = "AC577d98d4a3529117634d2665ff71cb4d";
-  public static final String AUTH_TOKEN = "bf8dc2397230c108b876eb25a3c46b4e";
+  public static final String AUTH_TOKEN = "be43446c5227b4c93de9a71db56741b5";
     @FXML
     private AnchorPane contentArea;
     @FXML
@@ -64,6 +69,14 @@ public class FrontReservationController implements Initializable {
     @FXML
     private GridPane gridpane;
     private Button resev;
+    @FXML
+    private JFXButton d;
+    @FXML
+    private JFXButton p;
+    @FXML
+    private Label lnom;
+    @FXML
+    private Label lprenom;
  
 
     /**
@@ -73,6 +86,9 @@ public class FrontReservationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         this.setPane();
+        Utilisateur admin=new UtilisateurS().getUserByEmail(l_email);
+      lnom.setText(admin.getNom());
+      lprenom.setText(admin.getPrenom());
 
     }    
 
@@ -93,62 +109,9 @@ public class FrontReservationController implements Initializable {
               
     }
 
-    private void ajouter(ActionEvent event) {
-     
-  
-     // Création de l'alerte
-Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-alert.setTitle("Saisie de plusieurs champs");
-alert.setHeaderText(null);
-alert.setContentText("Veuillez saisir les informations :");
-
-// Création des champs de saisie
-TextField champId = new TextField();
-DatePicker champDateDebut = new DatePicker();
-champDateDebut.setPromptText("YYYY-MM-DD");
-DatePicker champDateFin = new DatePicker();
-champDateFin.setPromptText("YYYY-MM-DD");
-
-// Affichage de l'alerte et récupération des valeurs saisies
-Optional<ButtonType> result = alert.showAndWait();
-if (result.isPresent() && result.get() == ButtonType.OK) {
-    // Vérification de la validité des dates
-    LocalDate dateDebut = champDateDebut.getValue();
-    LocalDate dateFin = champDateFin.getValue();
-    if (dateDebut == null || dateFin == null || dateDebut.isAfter(dateFin)) {
-        Alert al = new Alert(Alert.AlertType.ERROR);
-        al.setTitle("Erreur de saisie");
-        al.setHeaderText(null);
-        al.setContentText("Les dates saisies sont invalides!");
-        al.showAndWait();
-        return;
-        
-    }
-    
-    Reservation r = new Reservation(Integer.parseInt(champId.getText()), dateDebut.toString(), dateFin.toString());
-    Reservation_Service a = new Reservation_Service();
-    a.ajouter_reservation(r);
-
-    Alert al = new Alert(Alert.AlertType.INFORMATION);
-    al.setTitle("Réservation effectuée");
-    al.setHeaderText(null);
-    al.setContentText("Votre réservation a été faite");
-    al.showAndWait();
+   
     
     
-    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    Message message = Message.creator(
-      new com.twilio.type.PhoneNumber("+21652510089"),
-      new com.twilio.type.PhoneNumber("+12708195429"),
-      "Votre réservation a été faite de "+champDateDebut.getValue()+ " jusqu à "+champDateFin.getValue())
-
-    .create();
-
-    System.out.println(message.getSid());
-    
-}
-
-    }
     private ImageView createImageView(String marque)
     {
           ImageView iamageView = new ImageView();
@@ -194,25 +157,155 @@ ImageView imageView = new ImageView(image);
          label.setText(content);
          return  label;       
      }
-     private Button crateButton()
-     {
-       Button bt=new Button("Valider"); 
-       bt.setTranslateY(200);
-       bt.setTranslateX(100);
-       return bt;
-     }
-   private Pane createPane(String marque,String couleur,String vitesse) {
+     
+   public void Reserver(int id) {
+ 
+     // Création de l'alerte
+// Création des champs de saisie
+
+Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+alert.setTitle("Saisie de plusieurs champs");
+alert.setHeaderText(null);
+alert.setContentText("Veuillez saisir les informations :");
+
+TextField champId = new TextField();
+
+DatePicker champDateDebut = new DatePicker();
+champDateDebut.setPromptText("YYYY-MM-DD");
+
+DatePicker champDateFin = new DatePicker();
+champDateFin.setPromptText("YYYY-MM-DD");
+
+TextField champmontant = new TextField();
+
+// Création du label pour afficher le montant
+Label labelMontant = new Label();
+
+// Ajout d'un ChangeListener aux date pickers
+champDateDebut.valueProperty().addListener((observable, oldValue, newValue) -> {
+    // Ne rien faire si la date de fin n'est pas encore sélectionnée
+    if (champDateFin.getValue() == null) {
+        return;
+    }
+
+    // Calcul de la différence de jours entre les deux dates
+    long diffDays = ChronoUnit.DAYS.between(newValue, champDateFin.getValue());
+    // Mise à jour du champ du montant
+    champmontant.setText(String.valueOf(diffDays));
+});
+
+champDateFin.setOnAction(e -> {
+    LocalDate dateDebut = champDateDebut.getValue();
+    LocalDate dateFin = champDateFin.getValue();
+    if (dateDebut != null && dateFin != null) {
+        long jours = ChronoUnit.DAYS.between(dateDebut, dateFin);
+        double montant = jours * 10;
+        champmontant.setText(String.valueOf(montant));
+    }
+});
+
+GridPane grid = new GridPane();
+grid.setHgap(10);
+grid.setVgap(10);
+
+grid.add(new Label("Date de début:"), 0, 1);
+grid.add(champDateDebut, 1, 1);
+grid.add(new Label("Date de fin:"), 0, 2);
+grid.add(champDateFin, 1, 2);
+
+grid.add(new Label("Montant:"), 0, 3);
+grid.add(champmontant, 1, 3);
+
+// Ajout du GridPane à l'alerte
+alert.getDialogPane().setContent(grid);
+
+// Ajout du label pour afficher le montant
+alert.getDialogPane().setContent(grid);
+alert.getDialogPane().getChildren().add(labelMontant);
+GridPane.setConstraints(labelMontant, 1, 4);
+
+// Affichage de l'alerte et attente de la réponse de l'utilisateur
+Optional<ButtonType> result = alert.showAndWait();
+if (result.isPresent() && result.get() == ButtonType.OK) {
+    // Traitement des champs saisis par l'utilisateur
+    // ...
+}
+
+
+if (result.isPresent() && result.get() == ButtonType.OK) {
+    // Vérification de la validité des dates
+    LocalDate dateDebut = champDateDebut.getValue();
+    LocalDate dateFin = champDateFin.getValue();
+    if (dateDebut == null || dateFin == null || dateDebut.isAfter(dateFin)) {
+        Alert al = new Alert(Alert.AlertType.ERROR);
+        al.setTitle("Erreur de saisie");
+        al.setHeaderText(null);
+        al.setContentText("Les dates saisies sont invalides!");
+        al.showAndWait();
+        return;
+        
+    }
+    Utilisateur u=new Utilisateur();
+    UtilisateurS us=new UtilisateurS();
+    
+     Reservation_Service a = new Reservation_Service();
+     System.out.println(l_email); 
+   u=us.getUserByEmail(l_email);
+    Reservation r = new Reservation(0, dateDebut.toString(), dateFin.toString(),a.calculmontant(dateDebut.toString(),dateFin.toString()),id,u.getId());
+  
+    a.ajouter_reservation(r);
+
+    Alert al = new Alert(Alert.AlertType.INFORMATION);
+    al.setTitle("Réservation effectuée");
+    al.setHeaderText(null);
+    al.setContentText("Votre réservation a été faite");
+    al.showAndWait();
+    
+    
+    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    Message message = Message.creator(
+      new com.twilio.type.PhoneNumber("+21652510089"),
+      new com.twilio.type.PhoneNumber("+12708195429"),
+      "Votre réservation a été faite de "+champDateDebut.getValue()+ " jusqu à "+champDateFin.getValue()+" le montant est "+champmontant.getText()+"dt")
+
+    .create();
+
+    System.out.println(message.getSid());
+    
+}
+
+   }
+     
+     
+private Button crateButton(int id) {
+    Button bt = new Button("Réserver");
+    bt.getStyleClass().add("my-button"); // add the CSS class to the button
+    bt.setTranslateY(200);
+    bt.setTranslateX(150);
+    
+    bt.setOnAction(action->{
+       this.Reserver(id); 
+   });
+    return bt;
+
+}
+
+
+
+
+private Pane createPane(int id,String marque, String couleur, String vitesse) {
     Pane pane = new Pane();
     pane.setPrefHeight(250);
     pane.setPrefWidth(250);
-    pane.setStyle("-fx-background-color: #6F5CC2;");
+    pane.setStyle("-fx-background-color: #95b0b7; -fx-background-radius: 10px;");
     pane.getChildren().add(this.createImageView(marque));
-    pane.getChildren().add(this.createLabel(0,0,"Marque:"+marque));
-    pane.getChildren().add(this.createLabel(0,100,"Couleur:"+couleur));
-    pane.getChildren().add(this.createLabel(100,100,"Vitesse:"+vitesse));
-    pane.getChildren().add(this.crateButton());
+    pane.getChildren().add(this.createLabel(20, 180, "Marque:" + marque));
+    pane.getChildren().add(this.createLabel(20, 200, "Couleur:" + couleur));
+    pane.getChildren().add(this.createLabel(20, 220, "Vitesse:" + vitesse));
+    pane.getChildren().add(this.crateButton(id));
     return pane;
 }
+
     public void setPane()
     {
       //Affichage des donneés de la base  sur  le front
@@ -227,7 +320,7 @@ for (RowConstraints row : gridpane.getRowConstraints()) {
         try {
             String selectQuery = "SELECT id, marque ,couleur,vitesse_max FROM vehicule ";
          
-           PreparedStatement ps= MyConnexion.getIstance().getCnx().prepareStatement(selectQuery);
+           PreparedStatement ps= MyConnection.getInstance().getCnx().prepareStatement(selectQuery);
            ResultSet resultSet = ps.executeQuery();
             for (int i = 0; i <4; i++) {
                  for (int j = 0; j <3; j++) {
@@ -235,40 +328,19 @@ for (RowConstraints row : gridpane.getRowConstraints()) {
               
                
                 if (resultSet.next()) {
+                    int id = resultSet.getInt("id");
                     String marque = resultSet.getString("marque");
                     String couleur = resultSet.getString("couleur");
                     String vitesse_max = resultSet.getString("vitesse_max");
-                   
-                      gridpane.add(this.createPane(marque,couleur,vitesse_max),j,i);
+                      gridpane.add(this.createPane(id,marque,couleur,vitesse_max),j,i);
                         
-                }
-                        
-                        //test.getChildren().add(resev);
-                        //test2.getChildren().add(resev);
-                       
-                       
-                       
-                        
-                   
-                
-                }
-                
-               
-                
+                }                      
+                 }   
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }    
 
-// Copy the children of the original pane to the copied pane
-
-
-
     }
-
-   
-    
-    
-
 
 }

@@ -69,7 +69,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 import services.Reservation_Service;
 import services.vehicule_Service;
-import utils.MyConnexion;
+import utils.MyConnection;
 
 /**
  * FXML Controller class
@@ -535,7 +535,7 @@ private void recherche_Reservation(ActionEvent event) {
         DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dateDebut = inputFormat.parse(mois);
         String dateDebutStr = outputFormat.format(dateDebut);
-        PreparedStatement ps=MyConnexion.getIstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from reservation where MONTH(date_debut) = MONTH(?)");
         ps.setString(1, dateDebutStr);
         ResultSet rs=ps.executeQuery();
         
