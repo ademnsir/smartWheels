@@ -26,7 +26,7 @@
                               <TextField fx:id="lieu" layoutX="75.0" layoutY="413.0" prefHeight="37.0" prefWidth="208.0" promptText="Lieu" />
                               <DatePicker fx:id="date_deb" layoutX="75.0" layoutY="236.0" prefHeight="43.0" prefWidth="207.0" promptText="Date début" style="-fx-background-color: #52438F;" />
                               <DatePicker fx:id="date_fin" layoutX="74.0" layoutY="329.0" prefHeight="42.0" prefWidth="210.0" promptText="Date fin" style="-fx-background-color: #52438F;" />
-                              <TextField fx:id="nb_places" layoutX="72.0" layoutY="504.0" prefHeight="43.0" prefWidth="213.0" promptText="Nb places" />
+                              <TextField fx:id="nb_places" disable="true" layoutX="72.0" layoutY="504.0" prefHeight="43.0" prefWidth="213.0" promptText="Nb places" />
                               <TextField fx:id="types_event" layoutX="72.0" layoutY="601.0" prefHeight="40.0" prefWidth="215.0" promptText="Type" />
                            </children>
                         </AnchorPane>
@@ -37,7 +37,7 @@
                               <TableColumn fx:id="e_datedeb" prefWidth="125.0" text="Date début" />
                               <TableColumn fx:id="e_datefin" prefWidth="139.0" text="Date fin" />
                               <TableColumn fx:id="e_lieu" prefWidth="98.0" text="Lieu" />
-                              <TableColumn fx:id="e_nbplaces" prefWidth="112.0" text="Nb places" />
+                              <TableColumn fx:id="e_nbplaces" prefWidth="112.0" text="Nb places" visible="false" />
                               <TableColumn fx:id="e_type" prefWidth="94.0" text="Type" />
                               <TableColumn fx:id="e_nbvues" prefWidth="105.0" text="Nb vues" />
                           </columns>

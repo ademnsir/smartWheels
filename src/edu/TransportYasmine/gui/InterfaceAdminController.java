@@ -695,7 +695,7 @@ public boolean ValidationTel() {
 }
     @FXML
     private void ajouterevenement(ActionEvent event) {
-        if ((nom_event.getText().isEmpty()  || date_deb.getValue() == null || date_fin.getValue() == null || lieu.getText().isEmpty()) || nb_places.getText().isEmpty()|| types_event.getText().isEmpty()) {
+        if ((nom_event.getText().isEmpty()  || date_deb.getValue() == null || date_fin.getValue() == null || lieu.getText().isEmpty()) /*|| nb_places.getText().isEmpty()*/|| types_event.getText().isEmpty()) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Attention");
     alert.setHeaderText(null);
