@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="677.0" prefWidth="1135.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
+   <children>
+      <TabPane layoutX="231.0" layoutY="65.0" prefHeight="607.0" prefWidth="905.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Gestion Reclamation">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="836.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="599.0" fitWidth="959.0" layoutX="4.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/service.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tvreclamation" layoutX="357.0" layoutY="136.0" prefHeight="346.0" prefWidth="526.0">
+                          <columns>
+                            <TableColumn fx:id="colid" prefWidth="31.4666748046875" text="Id" />
+                            <TableColumn fx:id="colnom" prefWidth="76.5333251953125" text="Nom" />
+                              <TableColumn fx:id="colprenom" prefWidth="83.20001220703125" text="Prenom" />
+                              <TableColumn fx:id="coladresse" prefWidth="132.0" text="Adresse mail" />
+                              <TableColumn fx:id="colcontenu" prefWidth="106.9332275390625" text="Contenu" />
+                              <TableColumn fx:id="cdate" prefWidth="91.20001220703125" text="Date" />
+                          </columns>
+                        </TableView>
+                        <VBox layoutX="175.0" layoutY="54.0" prefHeight="199.0" prefWidth="162.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="tfnom" promptText="Nom" />
+                              <TextField fx:id="tfprenom" layoutX="10.0" layoutY="36.0" promptText="Prenom" />
+                              <TextField fx:id="tfadresse" layoutX="10.0" layoutY="61.0" promptText="Email" />
+                              <TextField fx:id="tfcontenu" layoutX="10.0" layoutY="87.0" prefHeight="91.0" prefWidth="175.0" promptText="Contenu" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="38.0" layoutY="54.0" prefHeight="199.0" prefWidth="104.0" spacing="15.0">
+                           <children>
+                              <Label text="Nom" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Prenom" textFill="#faf6f6">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Adresse mail" textFill="#fffdfd">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Contenu" textFill="#faf6f6">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <TextField fx:id="tfrecherche" layoutX="366.0" layoutY="90.0" prefHeight="25.0" prefWidth="336.0" promptText="Advanced Search" />
+                        <Button fx:id="btninsert" layoutX="14.0" layoutY="337.0" mnemonicParsing="false" onAction="#insert" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: #6F5CC2;" text="AJouter" textFill="WHITE" />
+                        <Button fx:id="btnupdate" layoutX="134.0" layoutY="337.0" mnemonicParsing="false" onAction="#update" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #6F5CC2;" text="Modifer" textFill="WHITE" />
+                        <Button fx:id="btndelete" layoutX="256.0" layoutY="337.0" mnemonicParsing="false" onAction="#Delete" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #6F5CC2;" text="Supprimer" textFill="WHITE" />
+                        <Button fx:id="btnExportExcel" layoutX="564.0" layoutY="517.0" mnemonicParsing="false" onAction="#exportToExcel" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #6F5CC2;" text="Export to Excel" textFill="WHITE" />
+                        <Button layoutX="703.0" layoutY="517.0" mnemonicParsing="false" onAction="#mail" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #6F5CC2;" text="Mail" textFill="WHITE" />
+                        <Button layoutX="748.0" layoutY="90.0" mnemonicParsing="false" onAction="#tri" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #6F5CC2;" text="Tri" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Gestion Commentaire">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="578.0" prefWidth="891.0">
+                     <children>
+                        <ImageView fitHeight="599.0" fitWidth="963.0" layoutX="5.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/service.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="194.0" layoutY="50.0" prefHeight="46.0" prefWidth="85.0" text="Commentez :" />
+                        <TextArea fx:id="tfCmntr" layoutX="313.0" layoutY="38.0" prefHeight="86.0" prefWidth="471.0" />
+                        <TableView fx:id="tvcommentaire" layoutX="287.0" layoutY="211.0" prefHeight="315.0" prefWidth="576.0">
+                          <columns>
+                            <TableColumn fx:id="colpseudo" prefWidth="75.0" text="pseudo" />
+                            <TableColumn fx:id="colcommentaire" prefWidth="500.0" text="commentaire" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btnInsertCmntr" layoutX="333.0" layoutY="153.0" mnemonicParsing="false" onAction="#InsertCmntr" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #6F5CC2;" text="AJouter" textFill="WHITE" />
+                        <Button fx:id="btnDeleteCmntr" layoutX="484.0" layoutY="153.0" mnemonicParsing="false" onAction="#DeleteCmntr" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #6F5CC2;" text="Supprimer" textFill="WHITE" />
+                        <Button fx:id="btnUpdateCmntr" layoutX="645.0" layoutY="153.0" mnemonicParsing="false" onAction="#UpdateCmntr" onMouseClicked="#ajouter" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #6F5CC2;" text="Modifier" textFill="WHITE" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane fx:id="anchor1" layoutX="-5.0" layoutY="-2.0" prefHeight="72.0" prefWidth="1141.0" style="-fx-background-color: #52438F;">
+         <children>
+            <TextField layoutX="474.0" layoutY="20.0" prefHeight="25.0" prefWidth="234.0" />
+            <Label layoutX="368.0" layoutY="18.0" prefHeight="30.0" prefWidth="72.0" text="Search" textFill="#e1dddd">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_prenom" layoutX="1047.0" layoutY="36.0" text="Prenom" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_nom" layoutX="1059.0" layoutY="6.0" text="Nom" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor" layoutX="-2.0" layoutY="68.0" prefHeight="594.0" prefWidth="234.0" style="-fx-background-color: #6F5CC2;">
+         <children>
+            <Pane fx:id="left" layoutX="-12.0" layoutY="94.0" prefHeight="516.0" prefWidth="248.0" stylesheets="@../styles/dahsboard.css">
+               <children>
+                  <VBox fx:id="vboxid" layoutX="14.0" layoutY="-93.0" prefHeight="335.0" prefWidth="234.0">
+                     <children>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Front" prefHeight="39.0" prefWidth="222.0" text="Front" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/front.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Utilisateur" prefHeight="39.0" prefWidth="215.0" text="Gestion Utilisateur" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/user.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Reservation" prefHeight="39.0" prefWidth="215.0" text="Gestion Rservation" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/reservation.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Produits" prefHeight="39.0" prefWidth="222.0" text="Gestion Produits" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/produit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Vehicule" prefHeight="39.0" prefWidth="215.0" text="Gestion Vehicule" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/vehicule.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="Evenement" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Evenement" prefHeight="39.0" prefWidth="222.0" text="Gestion Evenement" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/evenement.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Reparation" prefHeight="39.0" prefWidth="215.0" text="Gestion Reparation" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/reparation.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="id_rec" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Reclamation" prefHeight="39.0" prefWidth="228.0" text="Gestion Reclamation" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/reclamation.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#dexonnexion" prefHeight="39.0" prefWidth="222.0" text="Deconnexion" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lastversion/deconnexion.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
