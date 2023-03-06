@@ -30,8 +30,11 @@ public class CommentaireCrud implements CommentaireInterface<Commentaire> {
     }
      @Override
      public void ajouterCommentaire(Commentaire t) {
+<<<<<<< HEAD:services/CommentaireCrud.java
          Carte_fideliteS carteS=new Carte_fideliteS();
          carteS.ajoutClientToCarte();
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/services/CommentaireCrud.java
         try {
             String requete = "INSERT INTO `commentaire`(`id_com`, `contenu`)"
                     + "VALUES (?,?)";

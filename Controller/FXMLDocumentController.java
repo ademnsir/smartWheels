@@ -5,10 +5,15 @@
  */
 package Controller;
 
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
 import static Controller.Utilisateur_gestionController.l_email;
 import entities.Commentaire;
 import entities.Reclamation;
 import entities.Utilisateur;
+=======
+import entities.Commentaire;
+import entities.Reclamation;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
 import services.CommentaireCrud;
 import services.ReclamationCrud;
 import java.net.URL;
@@ -33,13 +38,22 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
 import java.util.Optional;
 import java.util.stream.Collectors;
+=======
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import javafx.application.Platform;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -48,12 +62,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+=======
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
 import services.UtilisateurS;
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
 
 /**
  *
@@ -99,6 +122,15 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane anchor1;
     @FXML
     private TextArea tfCmntr;
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
+=======
+    @FXML
+    private Button btnInsertCmntr;
+    @FXML
+    private Button btnUpdateCmntr;
+    @FXML
+    private Button btnDeleteCmntr;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
      @FXML
     private Button btnExportExcel;
     @FXML
@@ -108,6 +140,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableColumn<Commentaire, String> colcommentaire;
     @FXML
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
     private TableColumn<Reclamation, Date> cdate;
     @FXML
     private TextField tfrecherche;
@@ -133,6 +166,23 @@ public class FXMLDocumentController implements Initializable {
       l_nom.setText(admin.getNom());
       l_prenom.setText(admin.getPrenom());
         vboxid.setSpacing(18);
+=======
+    private TextField tfidcom;
+    @FXML
+    private Button btn_vehicule;
+    @FXML
+    private TextField NomTextField;
+    @FXML
+    private TextField ContenuTextField;
+    @FXML
+    private TextField MailTextField;
+    @FXML
+    private TableColumn<Reclamation, Date> cdate;
+    @FXML
+    private TextField tfrecherche;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
      recherche_avance();
         //showReclamation();
         showCommentaire();
@@ -204,6 +254,7 @@ tvreclamation.setItems(List);
         if(today.getDate()-amodifier.getDateCreation().getDate()>1){
             Alert alert2 =new Alert(Alert.AlertType.ERROR);
             alert2.setTitle("Erreur modification");
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
             alert2.setContentText("vous ne pouvez pas modifier au dela de 24h!");
             alert2.showAndWait();
         }
@@ -234,6 +285,25 @@ tvreclamation.setItems(List);
         }
 
 
+=======
+            alert2.setContentText("voulez vous vraiment modifier");
+            alert2.showAndWait();
+        }
+        else{
+            int idModifier=amodifier.getId();
+         
+            r.setNom(tfnom.getText());
+            r.setPrenom(tfprenom.getText());
+            r.setAdresse(tfadresse.getText());
+            r.setContenu(tfcontenu.getText());
+            Alert alert =new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("confirmer la modification");
+            alert.setContentText("voulez vous vraiment modifier");
+            alert.showAndWait();
+            rc.updateReclamation(idModifier, r);
+            
+            showReclamation();
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
         }
          
 
@@ -241,6 +311,7 @@ tvreclamation.setItems(List);
 
     @FXML
     private void Delete(ActionEvent event) {
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Confirm Deletion");
     alert.setContentText("Are you sure you want to delete the selected item?");
@@ -259,6 +330,16 @@ tvreclamation.setItems(List);
         alert.close();
     }
 }
+=======
+        Alert alert =new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("confirmer la suppression");
+        alert.setContentText("voulez vous vraiment supprimer la ligne");
+        alert.showAndWait();
+        int idSup=tvreclamation.getSelectionModel().getSelectedItem().getId();
+        rc.supprimerReclamation(idSup);
+        showReclamation();
+    }
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
 private String ControleSaisie(){
 String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +"[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
@@ -304,9 +385,13 @@ tvcommentaire.setItems(List);
         alert.setTitle("done");
         alert.setContentText(ControleSaisie());
         alert.showAndWait();}
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
          else if(detectBadWords()){
          }
          else{
+=======
+        else {
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
         Commentaire r =new Commentaire();
         r.setContenu(tfCmntr.getText());
         
@@ -316,6 +401,7 @@ tvcommentaire.setItems(List);
     }
 
     @FXML
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
       private void UpdateCmntr(ActionEvent event) {
         if (ControleCmntr().length()>0){
          Alert alert =new Alert(Alert.AlertType.WARNING);
@@ -325,11 +411,19 @@ tvcommentaire.setItems(List);
         else if(detectBadWords()){
          }
          else{
+=======
+    private void UpdateCmntr(ActionEvent event) {
+         Alert alert =new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("confirmer la modification");
+        alert.setContentText("voulez vous vraiment modifier");
+        alert.showAndWait();
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
          Commentaire r =new Commentaire();
          int idModifier=tvcommentaire.getSelectionModel().getSelectedItem().getId_com();
         r.setContenu(tfCmntr.getText());
        
         cmntr.updateCommentaire(idModifier, r);
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
         showCommentaire();}
          
 }
@@ -382,6 +476,37 @@ tvcommentaire.setItems(List);
     }
 }
 
+=======
+        showCommentaire();
+         // Get the index of the newly added row
+    int index = tvreclamation.getItems().size() - 1;
+
+    // Get the new row in the table view
+    ObservableList<Node> rows = tvreclamation.getChildrenUnmodifiable();
+    TableRow<Reclamation> newRow = (TableRow<Reclamation>) rows.get(index);
+
+    // Disable the new row
+   // newRow.setDisable(true);
+
+    // Schedule a task to enable the row after 5 minutes
+    ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    executor.schedule(() -> {
+        Platform.runLater(() -> newRow.setDisable(true));
+    }, 2, TimeUnit.MINUTES);
+}
+    
+
+    @FXML
+    private void DeleteCmntr(ActionEvent event) {
+         Alert alert =new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("confirmer la suppression");
+        alert.setContentText("voulez vous vraiment supprimer ?");
+        alert.showAndWait();
+        int idSup=tvcommentaire.getSelectionModel().getSelectedItem().getId_com();
+        cmntr.supprimerCommentaire(idSup);
+        showCommentaire();
+    }
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
     private String ControleCmntr(){
 
     String erreur="";
@@ -392,6 +517,10 @@ return erreur;
 
 }
 
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
+=======
+    @FXML
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
     private void btn_vehicule(ActionEvent event) throws IOException {
          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/GestionCommentaire.fxml"));
            Parent root1 = (Parent) fxmlLoader.load();
@@ -535,6 +664,7 @@ public void recherche_avance(){
             System.out.println("Probleme:"+e);
         }
     }
+<<<<<<< HEAD:Controller/FXMLDocumentController.java
 
     @FXML
     private void Utilisateur(ActionEvent event) {
@@ -663,5 +793,7 @@ public void recherche_avance(){
             System.out.println("Probleme:"+e);
         }
     }
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/FXMLDocumentController.java
  
 }

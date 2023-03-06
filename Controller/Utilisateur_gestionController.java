@@ -924,7 +924,11 @@ public class Utilisateur_gestionController implements Initializable {
 
     @FXML
     private void Reclamation(ActionEvent event) {
+<<<<<<< HEAD:Controller/Utilisateur_gestionController.java
           try{
+=======
+         try{
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/Gestion_UtilisateurController.java
          Parent root = FXMLLoader.load(getClass().getResource("/gui/FXMLDocument.fxml"));  
          Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -936,6 +940,7 @@ public class Utilisateur_gestionController implements Initializable {
             System.out.println("Probleme:"+e);
         }
     }
+<<<<<<< HEAD:Controller/Utilisateur_gestionController.java
 
     @FXML
     private void Evenement(ActionEvent event) {
@@ -1026,4 +1031,6 @@ public class Utilisateur_gestionController implements Initializable {
             System.out.println("Probleme:"+e);
         }
     }
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/Gestion_UtilisateurController.java
 }

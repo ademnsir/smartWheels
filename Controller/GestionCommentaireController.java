@@ -5,9 +5,13 @@
  */
 package Controller;
 
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
 import static Controller.Utilisateur_gestionController.l_email;
 import entities.Commentaire;
 import entities.Utilisateur;
+=======
+import entities.Commentaire;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
 import services.CommentaireCrud;
 import java.io.IOException;
 import java.net.URL;
@@ -18,12 +22,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
 import javafx.scene.Node;
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
 import javafx.scene.control.Label;
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -31,10 +41,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.Carte_fideliteS;
 import services.UtilisateurS;
+=======
+import javafx.stage.Stage;
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
 
 
 public class GestionCommentaireController implements Initializable {
@@ -64,6 +78,7 @@ public class GestionCommentaireController implements Initializable {
     @FXML
     private TextField tfidcom;
     @FXML
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
     private Label l_prenom;
     @FXML
     private Label l_nom;
@@ -80,6 +95,12 @@ public class GestionCommentaireController implements Initializable {
       l_nom.setText(admin.getNom());
       l_prenom.setText(admin.getPrenom());
         vboxid.setSpacing(18);
+=======
+    private Button btn_vehicule;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
          showCommentaire();
     }    
     public ObservableList<Commentaire>getCommentaireList(){
@@ -115,8 +136,11 @@ tvcommentaire.setItems(List);
         
         cmntr.ajouterCommentaire(r);
         showCommentaire();}
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
          //add client to carte
       
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
     }
 
     @FXML
@@ -157,6 +181,10 @@ return erreur;
 
 }
 
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
+=======
+    @FXML
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
     private void btn_vehicule(ActionEvent event) throws IOException {
          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/GestionCommentaire.fxml"));
            Parent root1 = (Parent) fxmlLoader.load();
@@ -190,6 +218,7 @@ return erreur;
         }
     }
 
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
     @FXML
     private void Utilisateur(ActionEvent event) {
           try{
@@ -233,5 +262,7 @@ return erreur;
     private void dexonnexion(ActionEvent event) {
     }
 
+=======
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
    
 }

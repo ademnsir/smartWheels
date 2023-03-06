@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
+<<<<<<< HEAD:Controller/MailController.java
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +17,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MailController {
+=======
+import javafx.scene.control.PasswordField;
+import javafx.scene.layout.AnchorPane;
+
+public class MailController {
+
+
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/MailController.java
     @FXML
     private TextField toField;
 
@@ -27,6 +36,7 @@ public class MailController {
 
     @FXML
     private AnchorPane rootPane;
+<<<<<<< HEAD:Controller/MailController.java
 
     @FXML
   void sendMail() {
@@ -90,3 +100,45 @@ public class MailController {
     }
 }
 
+=======
+    @FXML
+    private TextField fromField;
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    void sendMail() {
+        //smartwheels0@gmail.com
+        //sivxbctdmnybwtli
+        String fromEmail = "smartwheels0@gmail.com";
+        String password = "sivxbctdmnybwtli";
+        String toEmail = toField.getText();
+        String subject = subjectField.getText();
+        String message = messageArea.getText();
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        });
+
+        try {
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(fromEmail));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            msg.setSubject(subject);
+            msg.setText(message);
+            Transport.send(msg);
+            System.out.println("Mail sent to " + toEmail);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+}
+>>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/MailController.java
