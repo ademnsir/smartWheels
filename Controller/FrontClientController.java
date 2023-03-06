@@ -18,7 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+<<<<<<< HEAD:Controller/FrontClientController.java
 import static Controller.Utilisateur_gestionController.l_email;
+=======
+import static Controller.Gestion_UtilisateurController.l_email;
+>>>>>>> master:src/Controller/FrontClientController.java
 import entities.Utilisateur;
 import services.UtilisateurS;
 

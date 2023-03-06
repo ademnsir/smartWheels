@@ -28,7 +28,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+<<<<<<< HEAD:Controller/FrontController.java
 import static Controller.Utilisateur_gestionController.l_email;
+=======
+import static Controller.Gestion_UtilisateurController.l_email;
+>>>>>>> master:src/Controller/FrontController.java
 import entities.Utilisateur;
 import services.UtilisateurS;
 

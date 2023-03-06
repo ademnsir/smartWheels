@@ -3,11 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:interfaces/interfaceCarte.java
 package interfaces;
 
 import javafx.collections.ObservableList;
 import entities.Carte_fidelite;
 import entities.Utilisateur;
+=======
+<<<<<<< HEAD
+package interfaces;
+
+import javafx.collections.ObservableList;
+import entities.Carte_fidelite;
+import entities.Utilisateur;
+=======
+package projet_transport.interfaces;
+
+import javafx.collections.ObservableList;
+import projet_transport.model.Carte_fidelite;
+import projet_transport.model.Utilisateur;
+>>>>>>> master
+>>>>>>> master:src/interfaces/interfaceCarte.java
 
 /**
  *

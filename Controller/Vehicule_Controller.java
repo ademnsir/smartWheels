@@ -115,6 +115,7 @@ public class Vehicule_Controller implements Initializable {
      private AutoCompletionBinding<String> autoCompletionBinding;
     @FXML
     private Button cherchee;
+<<<<<<< HEAD:Controller/Vehicule_Controller.java
     @FXML
     private AnchorPane anchor1;
     @FXML
@@ -129,6 +130,8 @@ public class Vehicule_Controller implements Initializable {
     private Button Evenement;
     @FXML
     private Button id_rec;
+=======
+>>>>>>> master:src/Controller/Vehicule_Controller.java
  
 
 
@@ -385,6 +388,7 @@ private void cherchee(ActionEvent event) {
             // select the row
             tab.getSelectionModel().select(i);
         }
+<<<<<<< HEAD:Controller/Vehicule_Controller.java
     }
 }
 
@@ -419,7 +423,30 @@ private void cherchee(ActionEvent event) {
 
     @FXML
     private void home(ActionEvent event) {
+=======
+<<<<<<< HEAD
     }
+}
+
+    @FXML
+    private void utilisateur(ActionEvent event) 
+    {
+          try{
+         Parent root = FXMLLoader.load(getClass().getResource("/gui/gestion_utilisateur.fxml"));  
+         Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Probleme:"+e);
+        }
+=======
+>>>>>>> master
+>>>>>>> master:src/Controller/Vehicule_Controller.java
+    }
+}
 
     @FXML
     private void Utilisateur(ActionEvent event) {
@@ -436,6 +463,7 @@ private void cherchee(ActionEvent event) {
         }
     }
 
+<<<<<<< HEAD:Controller/Vehicule_Controller.java
     @FXML
     private void Reservation(ActionEvent event) {
          try{
@@ -542,6 +570,8 @@ private void cherchee(ActionEvent event) {
     }
 
 
+=======
+>>>>>>> master:src/Controller/Vehicule_Controller.java
     }
     
               

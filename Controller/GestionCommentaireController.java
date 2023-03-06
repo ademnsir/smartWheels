@@ -6,12 +6,16 @@
 package Controller;
 
 <<<<<<< HEAD:Controller/GestionCommentaireController.java
+<<<<<<< HEAD:Controller/GestionCommentaireController.java
 import static Controller.Utilisateur_gestionController.l_email;
 import entities.Commentaire;
 import entities.Utilisateur;
 =======
 import entities.Commentaire;
 >>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/GestionCommentaireController.java
+=======
+import entities.Commentaire;
+>>>>>>> master:src/Controller/GestionCommentaireController.java
 import services.CommentaireCrud;
 import java.io.IOException;
 import java.net.URL;

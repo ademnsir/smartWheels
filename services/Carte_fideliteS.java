@@ -3,7 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:services/Carte_fideliteS.java
 package services;
+=======
+<<<<<<< HEAD
+package services;
+=======
+package projet_transport.services;
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +21,25 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.print.DocFlavor;
+<<<<<<< HEAD:services/Carte_fideliteS.java
+=======
+<<<<<<< HEAD
+import Controller.Gestion_UtilisateurController;
+>>>>>>> master:src/services/Carte_fideliteS.java
 import interfaces.interfaceCarte;
 import entities.Carte_fidelite;
 import entities.Utilisateur;
 import utils.MyConnection;
+<<<<<<< HEAD:services/Carte_fideliteS.java
+=======
+=======
+import projet_transport.controler.Gestion_UtilisateurController;
+import projet_transport.interfaces.interfaceCarte;
+import projet_transport.model.Carte_fidelite;
+import projet_transport.model.Utilisateur;
+import projet_transport.utils.MyConnexion;
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
 
 /**
  *
@@ -27,7 +50,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
     {
         try {      
         String sql="insert into carte_fidelite (id,points) values (?,?)";
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement(sql);
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ps.setInt(1,c.getId());
         ps.setInt(2,c.getPoints());
         ps.execute();       
@@ -40,7 +71,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
     {
        try {
         String sql="update carte_fidelite set points=? where id=?;";
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement(sql);
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement(sql);
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ps.setInt(1,c.getPoints());
         ps.setInt(2,c.getId());
         ps.execute();
@@ -51,7 +90,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
         }
     public void Supprimer(int id) {
           try {
+<<<<<<< HEAD:services/Carte_fideliteS.java
             PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("delete from carte_fidelite where id=?");
+=======
+<<<<<<< HEAD
+            PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("delete from carte_fidelite where id=?");
+=======
+            PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("delete from carte_fidelite where id=?");
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
             ps.setInt(1,id);
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -65,7 +112,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
         ObservableList<Carte_fidelite> data=FXCollections.observableArrayList();
         try
         {
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from carte_fidelite");
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select * from carte_fidelite");
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select * from carte_fidelite");
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -85,7 +140,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
         ObservableList<String> data=FXCollections.observableArrayList();
         try
         {
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from utilisateur");
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from utilisateur");
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select id from utilisateur");
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -105,7 +168,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
         ObservableList<String> data=FXCollections.observableArrayList();
         try
         {
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from carte_fidelite");
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from carte_fidelite");
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select id from carte_fidelite");
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ResultSet rs=ps.executeQuery();
             while (rs.next())
             {
@@ -124,7 +195,15 @@ public class Carte_fideliteS implements interfaceCarte<Carte_fidelite>{
         ObservableList<String> data=FXCollections.observableArrayList();
         try
         {
+<<<<<<< HEAD:services/Carte_fideliteS.java
         PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from carte_fidelite where id=?");
+=======
+<<<<<<< HEAD
+        PreparedStatement ps=MyConnection.getInstance().getCnx().prepareStatement("select id from carte_fidelite where id=?");
+=======
+        PreparedStatement ps=MyConnexion.getInstance().getCnx().prepareStatement("select id from carte_fidelite where id=?");
+>>>>>>> master
+>>>>>>> master:src/services/Carte_fideliteS.java
         ps.setInt(1, id);
         ResultSet rs=ps.executeQuery();
             while (rs.next())

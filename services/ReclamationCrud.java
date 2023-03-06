@@ -88,6 +88,7 @@ public void updateReclamation(int id,Reclamation R){
     }
     
 <<<<<<< HEAD:services/ReclamationCrud.java
+<<<<<<< HEAD:services/ReclamationCrud.java
     public List<Reclamation> listeDesReclamations(int id) {
          List<Reclamation> myList = new ArrayList<>();
         try {
@@ -116,6 +117,8 @@ public void updateReclamation(int id,Reclamation R){
     
 =======
 >>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/services/ReclamationCrud.java
+=======
+>>>>>>> master:src/services/ReclamationCrud.java
     public boolean contentExist(Reclamation r){
         for(Reclamation rr:listeDesReclamations()){
             if(rr.getAdresse().equals(r.getAdresse())&& rr.getContenu().equals(r.getContenu())&& rr.getNom().equals(r.getNom())&&rr.getPrenom().equals(r.getPrenom())){

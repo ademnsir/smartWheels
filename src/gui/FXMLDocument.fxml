@@ -16,17 +16,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="723.0" prefWidth="1284.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="733.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
    <children>
-      <TabPane layoutX="219.0" layoutY="100.0" prefHeight="650.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="221.0" layoutY="100.0" prefHeight="626.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Reclamation">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="894.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="836.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <children>
+<<<<<<< HEAD
+=======
+                        <ImageView fitHeight="599.0" fitWidth="984.0" layoutX="-2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/service.jpg" />
+                           </image>
+                        </ImageView>
+>>>>>>> master
                         <TableView fx:id="tvreclamation" layoutX="357.0" layoutY="66.0" prefHeight="346.0" prefWidth="526.0">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="31.4666748046875" text="Id" />
@@ -37,50 +45,63 @@
                               <TableColumn fx:id="cdate" prefWidth="91.20001220703125" text="Date" />
                           </columns>
                         </TableView>
+<<<<<<< HEAD
                         <Button fx:id="btnExportExcel" layoutX="425.0" layoutY="431.0" mnemonicParsing="false" onAction="#exportToExcel" text="Export to Excel" />
+=======
+                        <Button fx:id="btnExportExcel" layoutX="572.0" layoutY="435.0" mnemonicParsing="false" onAction="#exportToExcel" text="Export to Excel" />
+>>>>>>> master
 
                         <Button fx:id="btninsert" layoutX="8.0" layoutY="311.0" mnemonicParsing="false" onAction="#insert" prefHeight="26.0" prefWidth="88.0" text="Insert" />
                         <Button fx:id="btnupdate" layoutX="111.0" layoutY="311.0" mnemonicParsing="false" onAction="#update" prefHeight="26.0" prefWidth="88.0" text="Update" />
                         <Button fx:id="btndelete" layoutX="220.0" layoutY="311.0" mnemonicParsing="false" onAction="#Delete" prefHeight="26.0" prefWidth="79.0" text="Delete" />
+<<<<<<< HEAD
                         <Label layoutX="62.0" layoutY="412.0" text="Advanced Search" />
     <TextField fx:id="NomTextField" layoutX="51.0" layoutY="444.0" promptText="Nom" />
     <TextField fx:id="ContenuTextField" layoutX="51.0" layoutY="483.0" promptText="Contenu" />
+=======
+                        <Label layoutX="415.0" layoutY="23.0" text="Advanced Search" />
+>>>>>>> master
                         <VBox layoutX="175.0" layoutY="54.0" prefHeight="199.0" prefWidth="162.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="tfnom" />
-                              <TextField fx:id="tfprenom" layoutX="10.0" layoutY="36.0" />
-                              <TextField fx:id="tfadresse" layoutX="10.0" layoutY="61.0" />
-                              <TextField fx:id="tfcontenu" layoutX="10.0" layoutY="87.0" />
+                              <TextField fx:id="tfnom" promptText="Nom" />
+                              <TextField fx:id="tfprenom" layoutX="10.0" layoutY="36.0" promptText="Prenom" />
+                              <TextField fx:id="tfadresse" layoutX="10.0" layoutY="61.0" promptText="Email" />
+                              <TextField fx:id="tfcontenu" layoutX="10.0" layoutY="87.0" prefHeight="91.0" prefWidth="175.0" promptText="Contenu" />
                            </children>
                         </VBox>
                         <VBox layoutX="38.0" layoutY="54.0" prefHeight="199.0" prefWidth="104.0" spacing="15.0">
                            <children>
-                              <Label text="Nom">
+                              <Label text="Nom" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Prenom">
+                              <Label text="Prenom" textFill="#faf6f6">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Adresse mail">
+                              <Label text="Adresse mail" textFill="#fffdfd">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label text="Contenu">
+                              <Label text="Contenu" textFill="#faf6f6">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
+<<<<<<< HEAD
     <TextField fx:id="MailTextField" layoutX="51.0" layoutY="531.0" promptText="Email" />
                         <TextField fx:id="tfrecherche" layoutX="445.0" layoutY="20.0" />
                         <Button layoutX="758.0" layoutY="20.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
                         <Button layoutX="546.0" layoutY="431.0" mnemonicParsing="false" onAction="#mail" prefHeight="25.0" prefWidth="118.0" text="Mail" />
+=======
+                        <TextField fx:id="tfrecherche" layoutX="553.0" layoutY="20.0" />
+                        <Button layoutX="783.0" layoutY="21.0" mnemonicParsing="false" onAction="#tri" prefHeight="18.0" prefWidth="74.0" text="Tri" />
+>>>>>>> master
                      </children>
                   </AnchorPane>
             </content>
@@ -101,8 +122,6 @@
                           </columns>
                         </TableView>
                         <Label layoutX="89.0" layoutY="344.0" prefHeight="18.0" prefWidth="165.0" text="Liste des commentaires" />
-                        <Label layoutX="158.0" layoutY="32.0" text="Votre pseud :" />
-                        <TextField fx:id="tfidcom" layoutX="273.0" layoutY="28.0" prefHeight="26.0" prefWidth="279.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -143,7 +162,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="anchor" layoutY="5.0" prefHeight="776.0" prefWidth="178.0" style="-fx-background-color: #6F5CC2;">
+      <AnchorPane fx:id="anchor" layoutY="5.0" prefHeight="776.0" prefWidth="178.0" style="-fx-background-color: #95b0b7;">
          <children>
             <Pane fx:id="left" layoutX="-12.0" layoutY="128.0" prefHeight="547.0" prefWidth="230.0" stylesheets="@../styles/dahsboard.css">
                <children>
@@ -169,7 +188,7 @@
                   </Button>
                   <Button fx:id="btn_vehicule" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btn_vehicule" prefHeight="39.0" prefWidth="202.0" text="    Gestion Vehicule" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="8.0" />
                      </font>
                   </Button>
                   <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="443.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="202.0" text="    Gestion Evenement" textFill="WHITE">
@@ -221,6 +240,6 @@
             </Pane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor1" prefHeight="100.0" prefWidth="1281.0" style="-fx-background-color: #52438F;" />
+      <AnchorPane fx:id="anchor1" prefHeight="100.0" prefWidth="1281.0" style="-fx-background-color: #95b0b7;" />
    </children>
 </AnchorPane>

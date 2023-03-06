@@ -3,7 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:utils/IPAddress.java
 package utils;
+=======
+<<<<<<< HEAD
+package utils;
+=======
+package projet_transport.utils;
+>>>>>>> master
+>>>>>>> master:src/utils/IPAddress.java
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

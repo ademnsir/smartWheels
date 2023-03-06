@@ -7,6 +7,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
 <<<<<<< HEAD:Controller/MailController.java
+<<<<<<< HEAD:Controller/MailController.java
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,13 +19,18 @@ import javafx.stage.Stage;
 
 public class MailController {
 =======
+=======
+>>>>>>> master:src/Controller/MailController.java
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 
 public class MailController {
+<<<<<<< HEAD:Controller/MailController.java
 
 
 >>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/MailController.java
+=======
+>>>>>>> master:src/Controller/MailController.java
     @FXML
     private TextField toField;
 
@@ -37,13 +43,25 @@ public class MailController {
     @FXML
     private AnchorPane rootPane;
 <<<<<<< HEAD:Controller/MailController.java
+<<<<<<< HEAD:Controller/MailController.java
+=======
+    @FXML
+    private TextField fromField;
+    @FXML
+    private PasswordField passwordField;
+>>>>>>> master:src/Controller/MailController.java
 
     @FXML
   void sendMail() {
     //smartwheels0@gmail.com
     //sivxbctdmnybwtli
+<<<<<<< HEAD:Controller/MailController.java
      String fromEmail="smartwheels00@gmail.com";
      String password="vmlhtoxrirgxyamh";
+=======
+    String fromEmail = "smartwheels0@gmail.com";
+    String password = "sivxbctdmnybwtli";
+>>>>>>> master:src/Controller/MailController.java
     String toEmail = toField.getText();
     String subject = subjectField.getText();
     String message = "<html><body>"
@@ -82,6 +100,7 @@ public class MailController {
     } catch (MessagingException e) {
         e.printStackTrace();
     }
+<<<<<<< HEAD:Controller/MailController.java
   }
 
     @FXML
@@ -142,3 +161,7 @@ public class MailController {
     }
 }
 >>>>>>> 1fc856547d52209282a287afc9b651ac05906907:src/Controller/MailController.java
+=======
+  }}
+
+>>>>>>> master:src/Controller/MailController.java
